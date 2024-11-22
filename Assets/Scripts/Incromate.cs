@@ -35,7 +35,7 @@ public class Incromate : MonoBehaviour {
     /// </summary>
     /// <param name="speed"></param>
     private void OnPlayerMoveUpdate(float speed) {
-        _agent.SetDestination(_player.transform.position);
+        _agent?.SetDestination(_player.transform.position);
     }
     
     /// <summary>

@@ -152,6 +152,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveActionRef: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   sprintActionRef: {fileID: -7471211009204490832, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  attractActionRef: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  orderActionRef: {fileID: 0}
+  mousePosActionRef: {fileID: 0}
+  rollActionRef: {fileID: 0}
   speed: 10
   sprintBoost: 10
   test: {fileID: 0}

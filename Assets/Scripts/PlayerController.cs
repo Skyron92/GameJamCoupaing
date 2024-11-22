@@ -2,11 +2,11 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
-{
-    [SerializeField] InputActionReference moveActionRef, sprintActionRef;
+public class PlayerController : MonoBehaviour {
+    [SerializeField] InputActionReference moveActionRef, sprintActionRef, attractActionRef, orderActionRef, mousePosActionRef, rollActionRef;
     InputAction MoveAction => moveActionRef.action;
     InputAction SprintAction => sprintActionRef.action;
+    private InputAction AttractAction => attractActionRef.action;
     Vector2 MoveInput => MoveAction.ReadValue<Vector2>();
     
     CharacterController _characterController;
@@ -15,8 +15,7 @@ public class PlayerController : MonoBehaviour
     
     public delegate void MoveDelegate(float speed);
     public event MoveDelegate moved, moveUpdate, stopped;
-
-
+    
     public Incromate test;
 
     private void Awake() {
@@ -30,7 +29,9 @@ public class PlayerController : MonoBehaviour
         MoveAction.canceled += OnMoveActionCanceled;
         SprintAction.Enable();
         SprintAction.started += OnSprintActionStarted;
-        sprintActionRef.action.canceled += OnSprintActionCanceled;
+        SprintAction.canceled += OnSprintActionCanceled;
+        AttractAction.Enable();
+        
     }
 
     private void OnDisable() {
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour
         SprintAction.Disable();
         SprintAction.started -= OnSprintActionStarted;
         sprintActionRef.action.canceled -= OnSprintActionCanceled;
+        AttractAction.Disable();
     }
 
     private void OnMoveActionStarted(InputAction.CallbackContext obj) {
