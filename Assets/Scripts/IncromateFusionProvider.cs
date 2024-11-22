@@ -24,11 +24,9 @@ public class IncromateFusionProvider : MonoBehaviour
             if(!canMerge) return;
             // Ok alors est-ce nous sommes compatibles, et est-ce que tu as le droit de merge aussi ?
             var otherIncromate = other.gameObject.GetComponent<IncromateFusionProvider>();
-            if (otherIncromate.level != level && otherIncromate.canMerge) return;
-            // Ok, dans ce cas je t'interdis de merge désormais, je m'occupe de tout
-            otherIncromate.canMerge = false;
-            // Je m'interdis de merge également
-            canMerge = false;
+            if (otherIncromate.level != level && !otherIncromate.canMerge) return;
+            // Ok, dans ce cas je nous interdis de merge désormais, je m'occupe de tout
+            otherIncromate.canMerge = canMerge = false;
             // Je te fais disparaître
             otherIncromate.transform.DOScale(0f, 1f).SetEase(Ease.Linear).onComplete += () => {
                 Destroy(otherIncromate.gameObject);
