@@ -21,10 +21,6 @@ public class BossColiderScript : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
-        {
-            print("Boss Colider");
-            _cameraScript.FocusOnBoss();
-        }
+        _cameraScript.StartCouroutinedab(_cameraScript.TargetTranformBoss);
     }
 }

@@ -1,6 +1,10 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Threading;
 using Unity.Cinemachine;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -10,9 +14,15 @@ public class CameraScript : MonoBehaviour
     private CinemachineRotationComposer rotationComposer;
     private CinemachineCamera CameraRef; 
     [SerializeField] private Transform TargetTransformPlayer;
-    [SerializeField] private Transform TargetTranformBoss;
-    [SerializeField] private Collider ColliderBoss;
+    public Transform TargetTranformBoss;
     
+   
+    // Variables internes
+    private bool isTransitioning = false;
+
+    private Transform currentTargetFollow;
+    private Transform currentTargetLookAt;
+
     
     // Positions spécifique pour le zoom joueur 
     private float VerticalArmLenghtPlayerFloat = 1f;
@@ -20,12 +30,13 @@ public class CameraScript : MonoBehaviour
 
     // positions spécifique pour le zoom Boss 
 
-    private float VerticalArmLenghtBossFloat = 10f;
-    private float CameraDistanceBossFloat = 15f;
+    private float VerticalArmLenghtBossFloat = 20f;
+    private float CameraDistanceBossFloat = 25f;
     bool isLookingBoss = false;
     
+    
     //variables déplacements côtés 
-    private float ScreenPosXFloat = 0.3f;
+    private float ScreenPosXFloat = -0.15f;
 
    
     
@@ -41,32 +52,35 @@ public class CameraScript : MonoBehaviour
         
         thirdPersonFollow=GetComponent<CinemachineThirdPersonFollow>();
         rotationComposer= GetComponent<CinemachineRotationComposer>();
-        rotationComposer.Composition.ScreenPosition.x = ScreenPosXFloat;
         FocusOnPlayer();
     }
     
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Jump"))
-        {
-            FocusOnBoss();
-            print("BOSS");
-        }
+       
     }
 
-    private void FocusOnPlayer()
+    public void FocusOnPlayer()
     {   
-        CameraRef.Follow = TargetTransformPlayer;
-        CameraRef.LookAt = TargetTransformPlayer;
+        currentTargetFollow = TargetTransformPlayer;
+        currentTargetLookAt = TargetTransformPlayer;
+        
+        CameraRef.Follow = currentTargetFollow ;
+        CameraRef.LookAt = currentTargetLookAt ;
+        
         thirdPersonFollow.VerticalArmLength = VerticalArmLenghtPlayerFloat;
         thirdPersonFollow.CameraDistance = CameraDistancePlayerFloat;
+        
         isLookingBoss=false;
-
     }
 
+    
+
     public void FocusOnBoss()
-    {
+    {   
+        
+        
         CameraRef.LookAt = TargetTranformBoss;
         thirdPersonFollow.VerticalArmLength = VerticalArmLenghtBossFloat;
         thirdPersonFollow.CameraDistance = CameraDistanceBossFloat;
@@ -74,6 +88,24 @@ public class CameraScript : MonoBehaviour
         rotationComposer.Composition.ScreenPosition.x = 0f;
 
     }
+
+    public void StartCouroutinedab(Transform targetTransform)
+    {
+        StartCoroutine(MakeTransition(targetTransform));
+    }
+
+    private IEnumerator MakeTransition(Transform targetTransform)
+    {
+        while (isTransitioning)
+        {
+            print("transition");
+            CameraRef.transform.position = Vector3.Lerp(CameraRef.transform.position,targetTransform.position,20f);
+            yield return new WaitForSeconds(3f);
+        }
+        FocusOnBoss();
+    }
+   
+   
     
     public void CameraMoveHorizontally(float direction) {
 
@@ -83,5 +115,11 @@ public class CameraScript : MonoBehaviour
         }
         
     }
+
+    public void ChangeFOVWhenRun()
+    {
+        CameraRef.Lens.FieldOfView = 90f;
+    }
+    
     
 }
