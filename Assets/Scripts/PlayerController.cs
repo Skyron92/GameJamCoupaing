@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,7 +7,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] InputActionReference moveActionRef, sprintActionRef, attractActionRef, orderActionRef, mousePosActionRef, rollActionRef;
     InputAction MoveAction => moveActionRef.action;
     InputAction SprintAction => sprintActionRef.action;
-    private InputAction AttractAction => attractActionRef.action;
+    public InputAction AttractAction => attractActionRef.action;
     Vector2 MoveInput => MoveAction.ReadValue<Vector2>();
     
     CharacterController _characterController;
@@ -16,12 +17,10 @@ public class PlayerController : MonoBehaviour {
     public delegate void MoveDelegate(float speed);
     public event MoveDelegate moved, moveUpdate, stopped;
     
-    public Incromate test;
     [SerializeField] private CameraScript cameraScript;
 
     private void Awake() {
         _characterController = GetComponent<CharacterController>();
-        test.SetPlayerAndBindMovement(this);
     }
 
     private void OnEnable() {
@@ -32,7 +31,6 @@ public class PlayerController : MonoBehaviour {
         SprintAction.started += OnSprintActionStarted;
         SprintAction.canceled += OnSprintActionCanceled;
         AttractAction.Enable();
-        
     }
 
     private void OnDisable() {
@@ -46,7 +44,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void OnMoveActionStarted(InputAction.CallbackContext obj) {
-        cameraScript.CameraMoveHorizontally(MoveInput.x);
+        cameraScript?.CameraMoveHorizontally(MoveInput.x);
         StartCoroutine(Move());
         moved?.Invoke(speed);
     }
@@ -72,6 +70,13 @@ public class PlayerController : MonoBehaviour {
             _characterController?.Move(direction);
             moveUpdate?.Invoke(0);
             yield return null;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Incromate")) {
+            var incro = other.gameObject.GetComponent<Incromate>();
+            incro.SetPlayerAndBindMovement(this);
         }
     }
 }
