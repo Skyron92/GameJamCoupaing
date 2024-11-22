@@ -52,6 +52,7 @@ public class Incromate : MonoBehaviour {
     /// </summary>
     /// <param name="speed"></param>
     private void OnPlayerMoved(float speed) {
+        if(_agent == null) return;
         StartCoroutine(SetSpeed(speed));
     }
     
@@ -60,7 +61,8 @@ public class Incromate : MonoBehaviour {
     /// </summary>
     /// <param name="speed"></param>
     private void OnPlayerMoveUpdate(float speed) {
-        _agent?.SetDestination(_player.transform.position);
+        if(_agent == null) return;
+        _agent.SetDestination(_player.transform.position);
     }
     
     /// <summary>
@@ -68,6 +70,7 @@ public class Incromate : MonoBehaviour {
     /// </summary>
     /// <param name="speed"></param>
     private void OnPlayerStopped(float speed) {
+        if(_agent == null) return;
         StartCoroutine(SetSpeed(0));
     }
 
@@ -90,5 +93,7 @@ public class Incromate : MonoBehaviour {
         _player.moved -= OnPlayerMoved;
         _player.moveUpdate -= OnPlayerMoveUpdate;
         _player.stopped -= OnPlayerStopped;
+        _player.AttractAction.started -= OnAttractActionStarted;
+        _player.AttractAction.canceled -= OnAttractActionCanceled;
     }
 }

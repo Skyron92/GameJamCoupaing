@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -15,7 +14,7 @@ public class IncromateFusionProvider : MonoBehaviour
 
     private void Initialize(int _level) {
         level = _level;
-        transform.DOScale(level, .5f).SetEase(Ease.OutBack);
+        transform.DOScale(level * .3f, .5f).SetEase(Ease.OutBack);
         transform.position = new Vector3(transform.position.x, level / 2, transform.position.z);
     }
     
