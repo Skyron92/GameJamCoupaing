@@ -1,5 +1,6 @@
 using System;
 using Unity.Cinemachine;
+using Unity.Mathematics;
 using UnityEngine;
 
 
@@ -19,9 +20,10 @@ public class CameraScript : MonoBehaviour
 
     private float VerticalArmLenghtBossFloat = 10f;
     private float CameraDistanceBossFloat = 40f;
+    bool isLookingBoss = false;
     
     //variables déplacements côtés 
-    private float ScreenPosXFloat = 0.5f;
+    private float ScreenPosXFloat = 0.3f;
 
    
     
@@ -56,7 +58,7 @@ public class CameraScript : MonoBehaviour
         CameraRef.Follow = TargetTransformPlayer;
         thirdPersonFollow.VerticalArmLength = VerticalArmLenghtPlayerFloat;
         thirdPersonFollow.CameraDistance = CameraDistancePlayerFloat;
-        
+        isLookingBoss=false;
 
     }
 
@@ -65,10 +67,18 @@ public class CameraScript : MonoBehaviour
         CameraRef.Follow = TargetTranformBoss;
         thirdPersonFollow.VerticalArmLength = VerticalArmLenghtBossFloat;
         thirdPersonFollow.CameraDistance = CameraDistanceBossFloat;
+        isLookingBoss = true;
         
     }
     
     public void CameraMoveHorizontally(float direction) {
-        rotationComposer.Composition.ScreenPosition.x = ScreenPosXFloat * direction;
+
+        if  (isLookingBoss!)
+        {
+            rotationComposer.Composition.ScreenPosition.x = ScreenPosXFloat * direction;
+        }
+        
+    
+        
     }
 }
