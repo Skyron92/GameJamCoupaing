@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,9 +12,16 @@ public class PlayerController : MonoBehaviour
     CharacterController _characterController;
     [SerializeField, Range(1,100)] float speed = 10;
     [SerializeField, Range(1,100)] float sprintBoost = 5;
+    
+    public delegate void MoveDelegate(float speed);
+    public event MoveDelegate moved, moveUpdate, stopped;
+
+
+    public Incromate test;
 
     private void Awake() {
         _characterController = GetComponent<CharacterController>();
+        test.SetPlayerAndBindMovement(this);
     }
 
     private void OnEnable() {
@@ -38,14 +44,17 @@ public class PlayerController : MonoBehaviour
 
     private void OnMoveActionStarted(InputAction.CallbackContext obj) {
         StartCoroutine(Move());
+        moved?.Invoke(speed);
     }
     
     private void OnMoveActionCanceled(InputAction.CallbackContext obj) {
         StopAllCoroutines();
+        stopped?.Invoke(0);
     }
 
     private void OnSprintActionStarted(InputAction.CallbackContext obj) {
         speed += sprintBoost;
+        moved?.Invoke(speed);
     }
     
     private void OnSprintActionCanceled(InputAction.CallbackContext obj) {
@@ -57,6 +66,7 @@ public class PlayerController : MonoBehaviour
             var direction = new Vector3(MoveInput.x, 0, MoveInput.y);
             direction *= speed * Time.deltaTime;
             _characterController?.Move(direction);
+            moveUpdate?.Invoke(0);
             yield return null;
         }
     }
