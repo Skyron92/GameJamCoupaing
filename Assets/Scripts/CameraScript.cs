@@ -21,8 +21,7 @@ public class CameraScript : MonoBehaviour
     private float CameraDistanceBossFloat = 40f;
     
     //variables déplacements côtés 
-    private float LeftScreenPosXFloat = -0.5f;
-    private float RightScreenPosXFloat = 0.5f;
+    private float ScreenPosXFloat = 0.5f;
 
    
     
@@ -38,7 +37,7 @@ public class CameraScript : MonoBehaviour
         
         thirdPersonFollow=GetComponent<CinemachineThirdPersonFollow>();
         rotationComposer= GetComponent<CinemachineRotationComposer>();
-        rotationComposer.Composition.ScreenPosition.x = LeftScreenPosXFloat;
+        rotationComposer.Composition.ScreenPosition.x = ScreenPosXFloat;
         FocusOnPlayer();
     }
     
@@ -50,8 +49,6 @@ public class CameraScript : MonoBehaviour
             FocusOnBoss();
             print("BOSS");
         }
-        
-
     }
 
     private void FocusOnPlayer()
@@ -70,21 +67,8 @@ public class CameraScript : MonoBehaviour
         thirdPersonFollow.CameraDistance = CameraDistanceBossFloat;
         
     }
-
     
-    
-    
-    
-    
-    private void CameraMoveRight()
-    {
-        rotationComposer.Composition.ScreenPosition.x = RightScreenPosXFloat;
+    public void CameraMoveHorizontally(float direction) {
+        rotationComposer.Composition.ScreenPosition.x = ScreenPosXFloat * direction;
     }
-
-    private void CameraMoveLeft()
-    {
-        rotationComposer.Composition.ScreenPosition.x = LeftScreenPosXFloat;
-    }
-    
-    
 }

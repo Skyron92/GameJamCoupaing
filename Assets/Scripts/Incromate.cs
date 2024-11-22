@@ -6,9 +6,12 @@ public class Incromate : MonoBehaviour {
 
     NavMeshAgent _agent;
     private PlayerController _player;
+    private IncromateFusionProvider _fusionProvider;
+    
 
     private void Awake() {
         _agent = GetComponent<NavMeshAgent>();
+        _fusionProvider = GetComponent<IncromateFusionProvider>();
     }
 
     /// <summary>

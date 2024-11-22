@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour {
     public event MoveDelegate moved, moveUpdate, stopped;
     
     public Incromate test;
+    [SerializeField] private CameraScript cameraScript;
 
     private void Awake() {
         _characterController = GetComponent<CharacterController>();
@@ -45,6 +46,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void OnMoveActionStarted(InputAction.CallbackContext obj) {
+        cameraScript.CameraMoveHorizontally(MoveInput.x);
         StartCoroutine(Move());
         moved?.Invoke(speed);
     }
