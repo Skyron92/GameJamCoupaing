@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour {
     
     CharacterController _characterController;
     [SerializeField, Range(1,100)] float speed = 10;
+    public float Speed => speed;
     [SerializeField, Range(1,100)] float sprintBoost = 5;
     
     public delegate void MoveDelegate(float speed);
@@ -56,6 +57,7 @@ public class PlayerController : MonoBehaviour {
 
     private void OnSprintActionStarted(InputAction.CallbackContext obj) {
         speed += sprintBoost;
+        if (!MoveAction.IsPressed()) return;
         moved?.Invoke(speed);
     }
     

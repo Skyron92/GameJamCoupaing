@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -11,31 +10,31 @@ public class IncromateFusionProvider : MonoBehaviour
 
     public void SetIncromate(Incromate i) => _incromate = i;
     
-    [HideInInspector] public bool isMerging, canMerge;
+    [HideInInspector] public bool canMerge;
 
     private void Initialize(int _level) {
         level = _level;
-        transform.DOScale(level, .5f).SetEase(Ease.OutBack);
+        transform.DOScale(level * .3f, .5f).SetEase(Ease.OutBack);
         transform.position = new Vector3(transform.position.x, level / 2, transform.position.z);
     }
     
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.layer == LayerMask.NameToLayer("Incromate")) {
+            // J'ai le doit de merge ?
+            if(!canMerge) return;
+            // Ok alors est-ce nous sommes compatibles, et est-ce que tu as le droit de merge aussi ?
             var otherIncromate = other.gameObject.GetComponent<IncromateFusionProvider>();
-            if (otherIncromate.level != level || !canMerge) return;
-            otherIncromate.isMerging = true;
-            if (!isMerging) {
-                otherIncromate.enabled = false;
-                var pos = transform.position + (otherIncromate.transform.position - transform.position) / 2;
-                transform.DOScale(0f, .5f).SetEase(Ease.InBack).onComplete += () => {
-                    isMerging = true;
-                    Merge(pos); 
-                    Destroy(gameObject);
-                };
-                return;
-            }
-            transform.DOScale(0f, 1f).SetEase(Ease.Linear).onComplete += () => {
-                Destroy(gameObject);
+            if (otherIncromate.level != level && !otherIncromate.canMerge) return;
+            // Ok, dans ce cas je nous interdis de merge désormais, je m'occupe de tout
+            otherIncromate.canMerge = canMerge = false;
+            // Je te fais disparaître
+            otherIncromate.transform.DOScale(0f, 1f).SetEase(Ease.Linear).onComplete += () => {
+                Destroy(otherIncromate.gameObject);
+            };
+            // Et je fais spawn notre fusion
+            var pos = transform.position + (otherIncromate.transform.position - transform.position) / 2;
+            transform.DOScale(0f, .5f).SetEase(Ease.InBack).onComplete += () => {
+                Merge(pos);
             };
         }
     }
@@ -44,5 +43,6 @@ public class IncromateFusionProvider : MonoBehaviour
         var newIncromate= Instantiate(incromatePrefab, position, Quaternion.identity);
         newIncromate.GetComponent<IncromateFusionProvider>().Initialize(level + 1);
         newIncromate.GetComponent<Incromate>().SetPlayerAndBindMovement(_incromate.Player);
+        Destroy(gameObject);
     }
 }
