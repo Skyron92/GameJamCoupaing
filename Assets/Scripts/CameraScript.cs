@@ -11,15 +11,17 @@ public class CameraScript : MonoBehaviour
     private CinemachineCamera CameraRef; 
     [SerializeField] private Transform TargetTransformPlayer;
     [SerializeField] private Transform TargetTranformBoss;
+    [SerializeField] private Collider ColliderBoss;
+    
     
     // Positions spécifique pour le zoom joueur 
-    private float VerticalArmLenghtPlayerFloat = 3f;
-    private float CameraDistancePlayerFloat = 15f;
+    private float VerticalArmLenghtPlayerFloat = 1f;
+    private float CameraDistancePlayerFloat = 5f;
 
     // positions spécifique pour le zoom Boss 
 
     private float VerticalArmLenghtBossFloat = 10f;
-    private float CameraDistanceBossFloat = 40f;
+    private float CameraDistanceBossFloat = 15f;
     bool isLookingBoss = false;
     
     //variables déplacements côtés 
@@ -56,29 +58,30 @@ public class CameraScript : MonoBehaviour
     private void FocusOnPlayer()
     {   
         CameraRef.Follow = TargetTransformPlayer;
+        CameraRef.LookAt = TargetTransformPlayer;
         thirdPersonFollow.VerticalArmLength = VerticalArmLenghtPlayerFloat;
         thirdPersonFollow.CameraDistance = CameraDistancePlayerFloat;
         isLookingBoss=false;
 
     }
 
-    private void FocusOnBoss()
+    public void FocusOnBoss()
     {
-        CameraRef.Follow = TargetTranformBoss;
+        CameraRef.LookAt = TargetTranformBoss;
         thirdPersonFollow.VerticalArmLength = VerticalArmLenghtBossFloat;
         thirdPersonFollow.CameraDistance = CameraDistanceBossFloat;
         isLookingBoss = true;
-        
+        rotationComposer.Composition.ScreenPosition.x = 0f;
+
     }
     
     public void CameraMoveHorizontally(float direction) {
 
-        if  (isLookingBoss!)
+        if  (!isLookingBoss)
         {
             rotationComposer.Composition.ScreenPosition.x = ScreenPosXFloat * direction;
         }
         
-    
-        
     }
+    
 }

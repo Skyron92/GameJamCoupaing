@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7632806580977806147}
   - component: {fileID: 1557472968779245269}
   - component: {fileID: 1542294813590445354}
+  - component: {fileID: 5919433990024710536}
   - component: {fileID: -1163506670372895803}
   m_Layer: 0
   m_Name: CinemachineCamera
@@ -94,7 +95,7 @@ MonoBehaviour:
   ShoulderOffset: {x: 0, y: -0.4, z: 0}
   VerticalArmLength: 2.14
   CameraSide: 0.5
-  CameraDistance: 6.03
+  CameraDistance: 19.6
   AvoidObstacles:
     Enabled: 0
     CollisionFilter:
@@ -133,6 +134,36 @@ MonoBehaviour:
     Time: 0
     Smoothing: 0
     IgnoreY: 0
+--- !u!114 &5919433990024710536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6440473648635117444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e501d18bb52cf8c40b1853ca4904654f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CollideAgainst:
+    serializedVersion: 2
+    m_Bits: 1
+  m_IgnoreTag: Player
+  m_TransparentLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  m_MinimumDistanceFromTarget: 0.65
+  m_AvoidObstacles: 1
+  m_DistanceLimit: 0.37
+  m_MinimumOcclusionTime: 0.9
+  m_CameraRadius: 1.52
+  m_Strategy: 2
+  m_MaximumEffort: 3
+  m_SmoothingTime: 0.38
+  m_Damping: 1.91
+  m_DampingWhenOccluded: 1.15
+  m_OptimalTargetDistance: 3.36
 --- !u!114 &-1163506670372895803
 MonoBehaviour:
   m_ObjectHideFlags: 0
