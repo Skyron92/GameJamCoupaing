@@ -20,20 +20,6 @@ public class Incromate : MonoBehaviour {
         }
     }
 
-    private void OnAttractActionStarted(InputAction.CallbackContext obj) {
-        _fusionProvider.canMerge = true;
-    }
-
-    private void OnAttractActionCanceled(InputAction.CallbackContext obj) {
-        _fusionProvider.canMerge = false;
-    }
-
-    private void OnDisable() {
-        if(!_player) return;
-        _player.AttractAction.started -= OnAttractActionStarted;
-        _player.AttractAction.canceled -= OnAttractActionCanceled;
-    }
-
     /// <summary>
     /// Called when an incromate is harvested by the player
     /// </summary>
@@ -53,6 +39,7 @@ public class Incromate : MonoBehaviour {
     /// <param name="speed"></param>
     private void OnPlayerMoved(float speed) {
         if(_agent == null) return;
+        StopAllCoroutines();
         StartCoroutine(SetSpeed(speed));
     }
     
@@ -71,7 +58,8 @@ public class Incromate : MonoBehaviour {
     /// <param name="speed"></param>
     private void OnPlayerStopped(float speed) {
         if(_agent == null) return;
-        StartCoroutine(SetSpeed(0));
+        StopAllCoroutines();
+        StartCoroutine(SetSpeed(speed));
     }
 
     /// <summary>
@@ -81,13 +69,39 @@ public class Incromate : MonoBehaviour {
     /// <returns></returns>
     IEnumerator SetSpeed(float targetSpeed) {
         if(_agent == null) yield break;
-        int factor = _agent.speed < targetSpeed ? 1 : -1;
+        bool speedUp = _agent.speed < targetSpeed;
+        int factor = speedUp ? 1 : -1;
         while (!Mathf.Approximately(_agent.speed, targetSpeed)) {
-            _agent.speed += 0.1f * factor;
+            _agent.speed += 0.2f * factor;
             yield return null;
         }
     }
+    
+    private void OnAttractActionStarted(InputAction.CallbackContext obj) {
+        _fusionProvider.canMerge = true;
+        StartCoroutine(SetSpeed(_player.Speed * 2));
+        StartCoroutine(Gather());
+    }
 
+    private void OnAttractActionCanceled(InputAction.CallbackContext obj) {
+        _fusionProvider.canMerge = false;
+        StopCoroutine(Gather());
+        StartCoroutine(SetSpeed(0));
+    }
+
+    IEnumerator Gather() {
+        while (_fusionProvider.canMerge) {
+            _agent.SetDestination(_player.transform.position);
+            yield return new WaitForSeconds(.5f);
+        }
+    }
+    
+    private void OnDisable() {
+        if(!_player) return;
+        _player.AttractAction.started -= OnAttractActionStarted;
+        _player.AttractAction.canceled -= OnAttractActionCanceled;
+    }
+    
     private void OnDestroy() {
         if (_player == null) return;
         _player.moved -= OnPlayerMoved;
