@@ -8,6 +8,7 @@ public class BrainCamera : MonoBehaviour
     [SerializeField] private CinemachineCamera WallRightCamera;
     [SerializeField] private CinemachineCamera WallLeftCamera;
     [SerializeField] private CinemachineCamera WallDownCamera;
+    [SerializeField] private CinemachineCamera WallUpCamera;
     bool FirstTopWallHit=false;
     
     private CinemachineBrain brain;
@@ -26,18 +27,20 @@ public class BrainCamera : MonoBehaviour
         {
             if (WallUpDown > 0)
             {
-                FocusOnPlayer();
+                player.SetMovementMode(new Vector2Int(WallUpDown, WallSide));
+                SetCameraPriority(WallUpCamera, WallRightCamera, WallDownCamera,WallLeftCamera,bossCamera,playerCamera);
             }
             else
             {
                 if (!FirstTopWallHit)
-                {
+                {   
                     player.SetMovementMode(new Vector2Int(WallUpDown, WallSide));
                     FocusOnBoss();
                     FirstTopWallHit = true;
                 }
                 else
                 {
+                    player.SetMovementMode(new Vector2Int(WallUpDown, WallSide));
                     SetCameraPriority(WallDownCamera, WallRightCamera, WallLeftCamera,bossCamera, playerCamera);
                 }
               
