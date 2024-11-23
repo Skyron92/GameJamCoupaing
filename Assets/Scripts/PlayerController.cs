@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private Vector2Int _movementMode = new Vector2Int(1, 0);
     
     public Animator animator;
+    [SerializeField] private FootstepSoundManager SoundManager;
+    
     private void Awake() {
         _characterController = GetComponent<CharacterController>();
     }
@@ -71,6 +73,7 @@ public class PlayerController : MonoBehaviour {
         speed += sprintBoost;
         if (!MoveAction.IsPressed()) return;
         animator?.SetBool("IsRunning", true);
+        SoundManager.isRunning = true;
         sprintEffect.SetActive(true);
         moved?.Invoke(speed);
     }
@@ -78,6 +81,7 @@ public class PlayerController : MonoBehaviour {
     private void OnSprintActionCanceled(InputAction.CallbackContext obj) {
         speed -= sprintBoost;
         animator?.SetBool("IsRunning", false);
+        SoundManager.isRunning = false;
         sprintEffect.SetActive(false);
     }
 
