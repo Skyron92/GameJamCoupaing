@@ -11,15 +11,16 @@ public class PlayerController : MonoBehaviour {
     Vector2 MoveInput => MoveAction.ReadValue<Vector2>();
     
     CharacterController _characterController;
-    [SerializeField, Range(1,100)] float speed = 10;
+    [SerializeField, Range(1,100)] float speed = 50;
     public float Speed => speed;
-    [SerializeField, Range(1,100)] float sprintBoost = 5;
+    [SerializeField, Range(1,100)] float sprintBoost = 10;
     
     public delegate void MoveDelegate(float speed);
     public event MoveDelegate moved, moveUpdate, stopped;
     
     [SerializeField] private CameraScript cameraScript;
-
+    
+    public Animator animator;
     private void Awake() {
         _characterController = GetComponent<CharacterController>();
     }
@@ -47,22 +48,26 @@ public class PlayerController : MonoBehaviour {
     private void OnMoveActionStarted(InputAction.CallbackContext obj) {
         cameraScript?.CameraMoveHorizontally(MoveInput.x);
         StartCoroutine(Move());
+        animator.SetBool("IsWalking", true);
         moved?.Invoke(speed);
     }
     
     private void OnMoveActionCanceled(InputAction.CallbackContext obj) {
         StopAllCoroutines();
+        animator.SetBool("IsWalking", false);
         stopped?.Invoke(0);
     }
 
     private void OnSprintActionStarted(InputAction.CallbackContext obj) {
         speed += sprintBoost;
         if (!MoveAction.IsPressed()) return;
+        animator.SetBool("IsRunning", true);
         moved?.Invoke(speed);
     }
     
     private void OnSprintActionCanceled(InputAction.CallbackContext obj) {
         speed -= sprintBoost;
+        animator.SetBool("IsRunning", false);
     }
 
     IEnumerator Move() {
