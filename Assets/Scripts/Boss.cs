@@ -14,6 +14,9 @@ public class Boss : MonoBehaviour
     private BoxCollider BossCollider;
     private bool isChasing = false;
     private bool isAttacking = false;
+    [SerializeField] GameObject projectilePrefab; // Préfabriqué du projectile
+    [SerializeField] Transform projectileSpawnPoint; // Point de spawn du projectile
+    private int projectileSpeed = 3;
 
     private void Awake()
     {
@@ -67,7 +70,36 @@ public class Boss : MonoBehaviour
   
     private void ThrowProjectile()
     {
-        print("LANCE PROJECTILE ");
+        // Vérifie que le prefab et le spawn point sont configurés
+        if (projectilePrefab != null && projectileSpawnPoint != null)
+        {
+         
+          
+            // Calcule la direction vers le joueur
+            Vector3 directionToPlayer = (_transformPlayer.position - projectileSpawnPoint.position).normalized;
+            
+            Vector3 spawnPosition = projectileSpawnPoint.position + directionToPlayer * 2f;
+            
+            // Instancie le projectile
+            GameObject projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.identity);
+
+            
+            // Ajoute une force au projectile
+            Rigidbody rb = projectile.GetComponent<Rigidbody>();
+            if (rb != null)
+            {   print("ajoute force projectile");
+                rb.useGravity = false;
+                rb.AddForce(directionToPlayer * projectileSpeed, ForceMode.Impulse);
+               
+            }
+
+            // Détruire le projectile après un temps pour éviter les fuites de mémoire
+            Destroy(projectile, 5f);
+        }
+        else
+        {
+            Debug.LogWarning("Projectile prefab or spawn point is not assigned!");
+        }
     }
 
     private IEnumerator ChasePlayerCoroutine()
