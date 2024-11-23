@@ -14,7 +14,7 @@ public class JulienSpawner : MonoBehaviour
     private void Incromate()
     {
         if (IncromateSpawner != null)
-        {
+        { 
             Vector3 spawnPosition = transform.position + transform.forward * SpawnDistance;
             Instantiate(IncromateSpawner, spawnPosition, transform.rotation);
         }
