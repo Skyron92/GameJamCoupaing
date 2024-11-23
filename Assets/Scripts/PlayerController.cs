@@ -1,9 +1,14 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour {
-    [SerializeField] InputActionReference moveActionRef, sprintActionRef, attractActionRef, orderActionRef, mousePosActionRef, rollActionRef;
+public class PlayerController : MonoBehaviour, IHitable
+{
+    [Header("Inputs")] [SerializeField] private InputActionReference moveActionRef;
+    [SerializeField] InputActionReference sprintActionRef, attractActionRef, orderActionRef, mousePosActionRef, rollActionRef;
     InputAction MoveAction => moveActionRef.action;
     InputAction SprintAction => sprintActionRef.action;
     public InputAction AttractAction => attractActionRef.action;
@@ -13,6 +18,7 @@ public class PlayerController : MonoBehaviour {
     Vector2 MoveInput => MoveAction.ReadValue<Vector2>();
     
     CharacterController _characterController;
+    [Header("Movement")]
     [SerializeField, Range(1,100)] float speed = 50;
     public float Speed => speed;
     [SerializeField, Range(1,100)] float sprintBoost = 10;
@@ -28,8 +34,25 @@ public class PlayerController : MonoBehaviour {
     public Animator animator;
     [SerializeField] private FootstepSoundManager SoundManager;
     
+    [Header("Health")]
+    
+    [SerializeField, Range(0, 5)] private int health = 1;
+    [SerializeField] SliderManager healthSlider;
+    private Renderer[] _renderers;
+    private List<Material> _materials = new List<Material>();
+
+    private int Health {
+        get => health;
+        set => health = value < 0 ? 0 : value;
+    }
+    
     private void Awake() {
         _characterController = GetComponent<CharacterController>();
+        healthSlider.maxValue = Health;
+        _renderers = GetComponentsInChildren<Renderer>();
+        foreach (var renderer in _renderers) {
+            _materials.Add(renderer.materials[0]);
+        }
     }
 
     private void OnEnable() {
@@ -128,5 +151,32 @@ public class PlayerController : MonoBehaviour {
             incro.SetPlayerAndBindMovement(this);
             animator.SetTrigger("Pickup");
         }
+    }
+
+    public void TakeDamage(int damage) {
+        Health -= damage;
+        foreach (var mat in _materials) {
+            mat.DOColor(Color.red, .2f).onComplete += () => mat.DOColor(Color.white, .2f);
+        }
+        if(Health <= 0) Die();
+        else {
+            healthSlider.SetSliderValue(Health);
+            transform.DOMove(transform.position + transform.forward * -.5f, .5f);
+        }
+    }
+
+    public void Die() {
+        animator.SetTrigger("Dead");
+        healthSlider.OutAnimation();
+        MoveAction.Disable();
+        MoveAction.started -= OnMoveActionStarted;
+        MoveAction.canceled -= OnMoveActionCanceled;
+        SprintAction.Disable();
+        SprintAction.started -= OnSprintActionStarted;
+        sprintActionRef.action.canceled -= OnSprintActionCanceled;
+        AttractAction.Disable();
+        OrderAction.Disable();
+        MousePosAction.Enable();
+        enabled = false;
     }
 }

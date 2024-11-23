@@ -6,9 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="f62bccd6-1efb-4b07-9cc2-0aceb96cb30f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GameJamCoupaing/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GameJamCoupaing/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/BossModel1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/BossModel1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameboyShader/GBCamera/gbcamera_PPS.unitypackage.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/PlayerAnimations.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/PlayerAnimations.controller" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/PlayerModel 1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/PlayerModel 1.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Camera/BrainCamera.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Camera/BrainCamera.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/LeoTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/LeoTest.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/IncroAttackProvider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/IncroAttackProvider.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SliderManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SliderManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

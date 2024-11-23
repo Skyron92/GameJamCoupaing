@@ -11,7 +11,7 @@ public class SliderManager : MonoBehaviour
     [SerializeField] private bool shake;
     [SerializeField, Range(1, 10)] private float startAnimationDuration = 2f;
     private RectTransform _rectTransform;
-    public float maxValue;
+    [HideInInspector] public float maxValue;
 
     private void Start() {
         _slider = GetComponent<Slider>();
@@ -29,5 +29,9 @@ public class SliderManager : MonoBehaviour
 
     private float ConvertCurrentValueToPercent() {
         return _slider.value / _slider.maxValue;
+    }
+
+    public void OutAnimation() {
+        _rectTransform.DOMoveY(-50f, 2f);
     }
 }
