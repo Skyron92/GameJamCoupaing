@@ -3,7 +3,7 @@ using UnityEngine;
 public class JulienSpawner : MonoBehaviour
 {
     public GameObject IncromateSpawner;
-    public float SpawnDelay = 5f;
+    public float SpawnDelay = 60f;
     public float SpawnDistance = 2f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
