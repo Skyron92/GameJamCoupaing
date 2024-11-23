@@ -9823,6 +9823,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 28e40a1a5b42aab4a9ee3d9484c46261, type: 3}
+      propertyPath: m_TagString
+      value: Hitable
+      objectReference: {fileID: 0}
     - target: {fileID: 5275701729544337616, guid: 28e40a1a5b42aab4a9ee3d9484c46261, type: 3}
       propertyPath: m_Materials.Array.size
       value: 2
@@ -9864,6 +9868,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 28e40a1a5b42aab4a9ee3d9484c46261, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4207331918442446511}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 28e40a1a5b42aab4a9ee3d9484c46261, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5986754196767090598}
   m_SourcePrefab: {fileID: 100100000, guid: 28e40a1a5b42aab4a9ee3d9484c46261, type: 3}
 --- !u!4 &5814414842765480302 stripped
 Transform:
@@ -9947,6 +9954,9 @@ MonoBehaviour:
   cameraScript: {fileID: 0}
   _movementMode: {x: 1, y: 0}
   animator: {fileID: 4207331918442446511}
+  SoundManager: {fileID: 0}
+  health: 5
+  healthSlider: {fileID: 0}
 --- !u!135 &1766243694482739896
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -9984,10 +9994,10 @@ Rigidbody:
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 63
+    m_Bits: 62
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
@@ -10017,3 +10027,26 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!136 &5986754196767090598
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6627930665037581268}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.5, z: 0}
