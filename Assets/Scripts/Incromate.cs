@@ -10,6 +10,9 @@ public class Incromate : MonoBehaviour, IHitable {
     private PlayerController _player;
     public PlayerController Player => _player;
     private IncromateFusionProvider _fusionProvider;
+    
+    private Renderer _renderer;
+    private Material _material;
 
     private int _health;
     
@@ -17,6 +20,8 @@ public class Incromate : MonoBehaviour, IHitable {
         get => _health;
         set => _health = value < 0 ? 0 : value;
     }
+
+    [SerializeField] private GameObject deathEffect;
 
     private void Awake() {
         _agent = GetComponent<NavMeshAgent>();
@@ -26,6 +31,10 @@ public class Incromate : MonoBehaviour, IHitable {
         if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 5, NavMesh.AllAreas)) {
             _agent.Warp(hit.position);
         }
+        _renderer = GetComponent<Renderer>();
+        _material = _renderer.materials[0];
+        
+        Health = _fusionProvider.level;
     }
 
     /// <summary>
@@ -119,12 +128,27 @@ public class Incromate : MonoBehaviour, IHitable {
         _player.AttractAction.canceled -= OnAttractActionCanceled;
     }
 
+    [ContextMenu("Hit")]
+    public void OnHit()
+    {
+        transform.DOMove(transform.position + transform.forward * -.5f, .5f);
+        _material.DOColor(Color.red, .2f).onComplete += () => _material.DOColor(Color.white, .2f);
+    }
     public void TakeDamage(int damageTaken) {
         Health -= damageTaken;
+        _material.DOColor(Color.red, .2f).onComplete += () => _material.DOColor(Color.white, .2f);
         if(Health <= 0) Die();
+        else {
+            transform.DOMove(transform.position + transform.forward * -.5f, .5f);
+        }
     }
 
     [ContextMenu("Kill")]
     public void Die() {
+        StopAllCoroutines();
+        _agent.SetDestination(transform.position);
+        var deathFX = Instantiate(deathEffect, transform.position, Quaternion.identity);
+        Destroy(deathFX, 5f);
+        transform.DOScale(Vector3.zero, .5f).onComplete += () => Destroy(gameObject);
     }
 }

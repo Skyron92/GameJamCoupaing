@@ -6,14 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f62bccd6-1efb-4b07-9cc2-0aceb96cb30f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GameJamCoupaing/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GameJamCoupaing/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Main Camera Custom Blends.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Camera Custom Blends.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/CinemachineCamera.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/CinemachineCamera.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TristanTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/TristanTest.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/BossColiderScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/BossColiderScript.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CameraScript.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CameraScript.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/WallColliderScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/WallColliderScript.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Incromate.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Incromate.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
