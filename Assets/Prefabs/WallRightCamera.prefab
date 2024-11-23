@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 1557472968779245269}
   - component: {fileID: 1542294813590445354}
   - component: {fileID: 5919433990024710536}
-  - component: {fileID: -1163506670372895803}
+  - component: {fileID: -6610545527098305794}
   m_Layer: 0
-  m_Name: CinemachineCamera
+  m_Name: WallRightCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Damping: 1.91
   m_DampingWhenOccluded: 1.15
   m_OptimalTargetDistance: 3.36
---- !u!114 &-1163506670372895803
+--- !u!114 &-6610545527098305794
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -173,7 +173,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6440473648635117444}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 564581bcd100c1746a5b48723cddd013, type: 3}
+  m_Script: {fileID: 11500000, guid: a1577b9baa86cb04a9784b8c99da2245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   TargetTransformPlayer: {fileID: 0}

@@ -5,7 +5,7 @@ public class BossColiderScript : MonoBehaviour
 
 { 
    
-    [SerializeField] private CameraScript _cameraScript;
+    [SerializeField] private BrainCamera _brainCamera;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -21,6 +21,9 @@ public class BossColiderScript : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        _cameraScript.StartCouroutinedab(_cameraScript.TargetTranformBoss);
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            _brainCamera.FocusOnBoss();
+        }
     }
 }
