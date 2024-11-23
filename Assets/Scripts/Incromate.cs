@@ -19,6 +19,8 @@ public class Incromate : MonoBehaviour, IHitable {
     [SerializeField] private LayerMask groundLayerMask;
     
     [HideInInspector] public IncroAttackProvider incroAttack;
+
+    [HideInInspector] public bool isPicked;
     
     public int Health {
         get => _health;

@@ -148,7 +148,9 @@ public class PlayerController : MonoBehaviour, IHitable
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.layer == LayerMask.NameToLayer("Incromate")) {
             var incro = other.gameObject.GetComponent<Incromate>();
+            if(incro.isPicked) return;
             incro.SetPlayerAndBindMovement(this);
+            incro.isPicked = true;
             animator.SetTrigger("Pickup");
         }
     }
