@@ -313,7 +313,7 @@
                 {
                     "name": "",
                     "id": "8cbb2f4b-a784-49cc-8d5e-c010b8c7f4e6",
-                    "path": "<Gamepad>/leftStickPress",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -328,6 +328,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "XR",
+                    "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c2746f10-0413-4573-b4a0-9563b84acc04",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -401,7 +412,7 @@
                 {
                     "name": "",
                     "id": "b3f66d0b-7751-423f-908b-a11c5bd95930",
-                    "path": "<Gamepad>/buttonNorth",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -413,6 +424,17 @@
                     "name": "",
                     "id": "02771126-4b3f-4f08-a175-78d1e5fca00c",
                     "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attract",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "60834dbe-b733-4354-98bf-215bee9ba67f",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

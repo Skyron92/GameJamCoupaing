@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -57,7 +58,7 @@ public class PlayerController : MonoBehaviour {
     private void OnMoveActionStarted(InputAction.CallbackContext obj) {
         cameraScript?.CameraMoveHorizontally(MoveInput.x);
         StartCoroutine(Move());
-        animator?.SetBool("IsWalking", true);
+        animator.SetBool("IsWalking", true);
         moved?.Invoke(speed);
     }
     
@@ -108,6 +109,7 @@ public class PlayerController : MonoBehaviour {
         if (other.gameObject.layer == LayerMask.NameToLayer("Incromate")) {
             var incro = other.gameObject.GetComponent<Incromate>();
             incro.SetPlayerAndBindMovement(this);
+            animator.SetTrigger("Pickup");
         }
     }
 }
