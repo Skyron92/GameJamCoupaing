@@ -201,6 +201,7 @@ MonoBehaviour:
   speed: 2
   sprintBoost: 1
   cameraScript: {fileID: 0}
+  _movementMode: {x: 1, y: 0}
   animator: {fileID: 4207331918442446511}
 --- !u!135 &1766243694482739896
 SphereCollider:

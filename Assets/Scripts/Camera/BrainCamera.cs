@@ -63,7 +63,7 @@ public class BrainCamera : MonoBehaviour
    
     public void FocusOnPlayer()
     {
-        player.SetMovementMode(new Vector2Int(0,0));
+        player.SetMovementMode(new Vector2Int(1,0));
         SetCameraPriority(playerCamera, bossCamera, WallRightCamera, WallLeftCamera, WallDownCamera);
         
     }
@@ -71,7 +71,7 @@ public class BrainCamera : MonoBehaviour
     
     public void FocusOnBoss()
     {
-        player.SetMovementMode(new Vector2Int(0,0));
+        player.SetMovementMode(new Vector2Int(1,0));
         SetCameraPriority(bossCamera, playerCamera, WallRightCamera, WallLeftCamera, WallDownCamera
         
         );

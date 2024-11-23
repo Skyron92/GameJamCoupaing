@@ -1,9 +1,6 @@
-using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
     [SerializeField] InputActionReference moveActionRef, sprintActionRef, attractActionRef, orderActionRef, mousePosActionRef, rollActionRef;
@@ -25,7 +22,7 @@ public class PlayerController : MonoBehaviour {
     
     [SerializeField] private CameraScript cameraScript;
 
-    private Vector2Int _movementMode = new Vector2Int(1, 0);
+    [SerializeField] private Vector2Int _movementMode = new Vector2Int(1, 0);
     
     public Animator animator;
     private void Awake() {
@@ -100,11 +97,17 @@ public class PlayerController : MonoBehaviour {
     }
 
     private Vector3 GetMovementMode(Vector3 movement) {
-        bool moveFront = movement.x != 0;
-        Vector3 newMovement = new Vector3(0,0,0);
-        newMovement.x = moveFront ? movement.x : movement.z * _movementMode.y;
-        newMovement.z = moveFront ? movement.z * _movementMode.x : movement.x * _movementMode.y;
-        return newMovement;
+       Vector3 newMovement = Vector3.zero;
+       if (_movementMode.x != 0) {
+           if (_movementMode.x > 0) newMovement = movement;
+           else if (_movementMode.x < 0) newMovement = -movement;
+           return newMovement;
+       }
+       else {
+          if(_movementMode.y > 0) newMovement = new Vector3(-movement.z,0,movement.x); 
+          else if(_movementMode.y < 0) newMovement = new Vector3(movement.z,0,-movement.x);
+          return newMovement;
+       }
     }
 
     private void OnTriggerEnter(Collider other) {
