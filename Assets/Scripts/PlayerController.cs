@@ -8,6 +8,9 @@ public class PlayerController : MonoBehaviour {
     InputAction MoveAction => moveActionRef.action;
     InputAction SprintAction => sprintActionRef.action;
     public InputAction AttractAction => attractActionRef.action;
+    public InputAction OrderAction => orderActionRef.action;
+    private InputAction MousePosAction => mousePosActionRef.action;
+    public Vector2 MousePosInput => MousePosAction.ReadValue<Vector2>();
     Vector2 MoveInput => MoveAction.ReadValue<Vector2>();
     
     CharacterController _characterController;
@@ -35,6 +38,8 @@ public class PlayerController : MonoBehaviour {
         SprintAction.started += OnSprintActionStarted;
         SprintAction.canceled += OnSprintActionCanceled;
         AttractAction.Enable();
+        OrderAction.Enable();
+        MousePosAction.Enable();
     }
 
     private void OnDisable() {
@@ -45,6 +50,8 @@ public class PlayerController : MonoBehaviour {
         SprintAction.started -= OnSprintActionStarted;
         sprintActionRef.action.canceled -= OnSprintActionCanceled;
         AttractAction.Disable();
+        OrderAction.Disable();
+        MousePosAction.Enable();
     }
 
     private void OnMoveActionStarted(InputAction.CallbackContext obj) {

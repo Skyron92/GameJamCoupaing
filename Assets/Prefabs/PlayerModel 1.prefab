@@ -195,9 +195,9 @@ MonoBehaviour:
   moveActionRef: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   sprintActionRef: {fileID: -7471211009204490832, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   attractActionRef: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  orderActionRef: {fileID: 0}
-  mousePosActionRef: {fileID: 0}
-  rollActionRef: {fileID: 0}
+  orderActionRef: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  mousePosActionRef: {fileID: -7719737869351406367, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  rollActionRef: {fileID: -2099379676528639254, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   speed: 2
   sprintBoost: 1
   cameraScript: {fileID: 0}

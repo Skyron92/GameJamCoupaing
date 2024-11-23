@@ -70,7 +70,7 @@
                 },
                 {
                     "name": "MousePosition",
-                    "type": "Value",
+                    "type": "PassThrough",
                     "id": "bd13bd2a-08de-4177-b1e6-708c9cc51e1d",
                     "expectedControlType": "Vector2",
                     "processors": "",

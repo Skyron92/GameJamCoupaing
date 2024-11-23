@@ -15,6 +15,8 @@ public class Incromate : MonoBehaviour, IHitable {
     private Material _material;
 
     private int _health;
+
+    [SerializeField] private LayerMask groundLayerMask;
     
     public int Health {
         get => _health;
@@ -46,6 +48,24 @@ public class Incromate : MonoBehaviour, IHitable {
         _player.stopped += OnPlayerStopped;
         _player.AttractAction.started += OnAttractActionStarted;
         _player.AttractAction.canceled += OnAttractActionCanceled;
+        _player.OrderAction.started += OnOrderActionStarted;
+        _player.OrderAction.canceled += OnOrderActionCanceled;
+    }
+
+    private void OnOrderActionStarted(InputAction.CallbackContext obj) {
+        var screenPos = _player.MousePosInput;
+        var pos = new Vector3(screenPos.x, screenPos.y, 100);
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(pos), out RaycastHit hit,
+                1000, groundLayerMask)) {
+            StopAllCoroutines();
+            _agent!.SetDestination(hit.point);
+            StartCoroutine(SetSpeed(_player.Speed));
+        }
+    }
+    
+    private void OnOrderActionCanceled(InputAction.CallbackContext obj) {
+        StopAllCoroutines();
+        _agent!.SetDestination(_player.transform.position);
     }
 
     /// <summary>
@@ -64,7 +84,7 @@ public class Incromate : MonoBehaviour, IHitable {
     /// <param name="speed"></param>
     private void OnPlayerMoveUpdate(float speed) {
         if(_agent == null) return;
-        _agent.SetDestination(_player.transform.position);
+        _agent!.SetDestination(_player.transform.position);
     }
     
     /// <summary>
@@ -84,10 +104,10 @@ public class Incromate : MonoBehaviour, IHitable {
     /// <returns></returns>
     IEnumerator SetSpeed(float targetSpeed) {
         if(_agent == null) yield break;
-        bool speedUp = _agent.speed < targetSpeed;
+        bool speedUp = _agent!.speed < targetSpeed;
         int factor = speedUp ? 1 : -1;
-        while (!Mathf.Approximately(_agent.speed, targetSpeed)) {
-            _agent.speed += 0.2f * factor;
+        while (!Mathf.Approximately(_agent!.speed, targetSpeed)) {
+            _agent!.speed += 0.2f * factor;
             yield return null;
         }
     }
@@ -106,15 +126,20 @@ public class Incromate : MonoBehaviour, IHitable {
 
     IEnumerator Gather() {
         while (_fusionProvider.canMerge) {
-            _agent.SetDestination(_player.transform.position);
+            _agent!.SetDestination(_player.transform.position);
             yield return new WaitForSeconds(.5f);
         }
     }
     
     private void OnDisable() {
         if(!_player) return;
+        _player.moved -= OnPlayerMoved;
+        _player.moveUpdate -= OnPlayerMoveUpdate;
+        _player.stopped -= OnPlayerStopped;
         _player.AttractAction.started -= OnAttractActionStarted;
         _player.AttractAction.canceled -= OnAttractActionCanceled;
+        _player.OrderAction.started -= OnOrderActionStarted;
+        _player.OrderAction.canceled -= OnOrderActionCanceled;
     }
     
     private void OnDestroy() {
@@ -124,12 +149,8 @@ public class Incromate : MonoBehaviour, IHitable {
         _player.stopped -= OnPlayerStopped;
         _player.AttractAction.started -= OnAttractActionStarted;
         _player.AttractAction.canceled -= OnAttractActionCanceled;
-    }
-
-    [ContextMenu("Hit")]
-    public void Hit()
-    {
-        TakeDamage(1);
+        _player.OrderAction.started -= OnOrderActionStarted;
+        _player.OrderAction.canceled -= OnOrderActionCanceled;
     }
     
     public void TakeDamage(int damageTaken) {
@@ -140,15 +161,13 @@ public class Incromate : MonoBehaviour, IHitable {
             transform.DOMove(transform.position + transform.forward * -.5f, .5f);
         }
     }
-
-    [ContextMenu("Kill")]
+    
     public void Die() {
         Destroy(GetComponent<Collider>());
         StopAllCoroutines();
         TrySplit();
         Instantiate(deathEffect, transform.position, Quaternion.identity);
         transform.DOScale(Vector3.zero, .5f).onComplete += () => Destroy(gameObject);
-        
     }
 
     private void TrySplit() {

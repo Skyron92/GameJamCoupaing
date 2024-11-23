@@ -40,14 +40,6 @@ public class IncromateFusionProvider : MonoBehaviour
         }
     }
 
-    [ContextMenu("Spawn Lvl 5")]
-    public void TestSpawn()
-    {
-        var instance = Instantiate(incromatePrefab, Vector3.zero, Quaternion.identity);
-        var fusion = instance.GetComponent<IncromateFusionProvider>();
-        fusion.Initialize(5);
-    }
-
     void Merge(Vector3 position) {
         var newIncromate= Instantiate(incromatePrefab, position, Quaternion.identity);
         newIncromate.GetComponent<IncromateFusionProvider>().Initialize(level + 1);
@@ -62,7 +54,7 @@ public class IncromateFusionProvider : MonoBehaviour
     }
 
     private void Spawn() {
-        Vector3 pos = transform.position + new Vector3(Random.Range(-1, 1),0,Random.Range(-1, 1));
+        Vector3 pos = transform.position + new Vector3(Random.Range(-.5f, .5f),0,Random.Range(-.5f, .5f));
         var instance = Instantiate(incromatePrefab, pos, Quaternion.identity);
         var fusion = instance.GetComponent<IncromateFusionProvider>();
         fusion.Initialize(Random.Range(1, level - 1));

@@ -69,7 +69,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6538903991835684241, guid: 8e7283108d707a24b86c49d3ecbe3ced, type: 3}
+  - {fileID: -6538903991835684241, guid: 28e40a1a5b42aab4a9ee3d9484c46261, type: 3}
   - {fileID: 2100000, guid: 051ee45f28c2a6244af7741f41d8dee7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -125,6 +125,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a361519265484eb449060e5e6faef877, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
   deathEffect: {fileID: 8130593110121980478, guid: 2d3f0cb46d9ec8542bb5d56063be3018, type: 3}
 --- !u!195 &5739056507225100583
 NavMeshAgent:
