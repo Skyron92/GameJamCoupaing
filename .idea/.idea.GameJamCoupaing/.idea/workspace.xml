@@ -6,9 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="f62bccd6-1efb-4b07-9cc2-0aceb96cb30f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GameJamCoupaing/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GameJamCoupaing/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/PlayerModel 1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/PlayerModel 1.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/LeoTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/LeoTest.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Main Camera Custom Blends.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Camera Custom Blends.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/CinemachineCamera.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/CinemachineCamera.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TristanTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/TristanTest.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/BossColiderScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/BossColiderScript.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CameraScript.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CameraScript.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/WallColliderScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/WallColliderScript.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +64,7 @@
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.27f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath C:\Users\court\Documents\GitHub\GameJamCoupaing -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\court\Documents\GitHub\GameJamCoupaing" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -67,7 +72,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.27f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath C:\Users\court\Documents\GitHub\GameJamCoupaing -testResults Logs/results.xml -logFile Logs/Editor.log -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\court\Documents\GitHub\GameJamCoupaing" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -104,7 +109,7 @@
       <option name="presentableId" value="Default" />
       <updated>1732269319467</updated>
       <workItem from="1732269321709" duration="2899000" />
-      <workItem from="1732351578787" duration="5802000" />
+      <workItem from="1732354503534" duration="1031000" />
     </task>
     <servers />
   </component>

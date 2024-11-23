@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class WallColliderScript : MonoBehaviour
 {
-    [SerializeField] CameraScript cameraScript;
-
+    [SerializeField] BrainCamera _brainCamera;
+    public bool isVertical;
+    public int WallSide;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -23,10 +24,7 @@ public class WallColliderScript : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-          
-           //cameraScript.FocusOnWalls(ZoneDeVisionRef);
-           cameraScript.FocusOnPlayer();
-
+          _brainCamera.FocusOnPlayer();
         }
     }
 }
