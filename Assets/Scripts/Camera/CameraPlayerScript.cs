@@ -10,8 +10,9 @@ using UnityEngine;
 
 public class CameraScript : MonoBehaviour
 {  
-    private CinemachineThirdPersonFollow thirdPersonFollow;
+    private CinemachineFollow _follow;
     private CinemachineRotationComposer rotationComposer;
+    
     private CinemachineCamera CameraRef; 
     [SerializeField] private Transform TargetTransformPlayer;
     public Transform TargetTranformBoss;
@@ -46,7 +47,7 @@ public class CameraScript : MonoBehaviour
     {
         CameraRef = GetComponent<CinemachineCamera>();
         
-        thirdPersonFollow=GetComponent<CinemachineThirdPersonFollow>();
+        _follow=GetComponent<CinemachineFollow>();
         rotationComposer= GetComponent<CinemachineRotationComposer>();
         FocusOnPlayer();
     }
@@ -63,9 +64,8 @@ public class CameraScript : MonoBehaviour
        
             CameraRef.Follow = TargetTransformPlayer ;
             CameraRef.LookAt = TargetTransformPlayer ;
-        
-            thirdPersonFollow.VerticalArmLength = VerticalArmLenghtPlayerFloat;
-            thirdPersonFollow.CameraDistance = CameraDistancePlayerFloat;
+
+            _follow.FollowOffset = new Vector3(0, 2, -10);
     }
     
     
