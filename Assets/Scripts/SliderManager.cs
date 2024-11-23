@@ -12,6 +12,7 @@ public class SliderManager : MonoBehaviour
     [SerializeField, Range(1, 10)] private float startAnimationDuration = 2f;
     private RectTransform _rectTransform;
     [HideInInspector] public float maxValue;
+    [SerializeField] private float outAnimationTarget;
 
     private void Start() {
         _slider = GetComponent<Slider>();
@@ -32,6 +33,6 @@ public class SliderManager : MonoBehaviour
     }
 
     public void OutAnimation() {
-        _rectTransform.DOMoveY(-50f, 2f);
+        _rectTransform.DOMoveY(outAnimationTarget, 2f);
     }
 }
