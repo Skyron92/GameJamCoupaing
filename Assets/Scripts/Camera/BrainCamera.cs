@@ -8,6 +8,7 @@ public class BrainCamera : MonoBehaviour
     [SerializeField] private CinemachineCamera WallRightCamera;
     [SerializeField] private CinemachineCamera WallLeftCamera;
     [SerializeField] private CinemachineCamera WallDownCamera;
+    [SerializeField] private CinemachineCamera WallUpCamera;
     bool FirstTopWallHit=false;
     
     private CinemachineBrain brain;
@@ -26,18 +27,20 @@ public class BrainCamera : MonoBehaviour
         {
             if (WallUpDown > 0)
             {
-                FocusOnPlayer();
+                player.SetMovementMode(new Vector2Int(WallUpDown, 0));
+                SetCameraPriority(WallUpCamera, WallRightCamera, WallDownCamera,WallLeftCamera,bossCamera,playerCamera);
             }
             else
             {
                 if (!FirstTopWallHit)
-                {
-                    player.SetMovementMode(new Vector2Int(WallUpDown, WallSide));
+                {   
+                    player.SetMovementMode(new Vector2Int(1,0));
                     FocusOnBoss();
                     FirstTopWallHit = true;
                 }
                 else
                 {
+                    player.SetMovementMode(new Vector2Int(WallUpDown, 0));
                     SetCameraPriority(WallDownCamera, WallRightCamera, WallLeftCamera,bossCamera, playerCamera);
                 }
               
@@ -48,14 +51,14 @@ public class BrainCamera : MonoBehaviour
         else
         {
             if (WallSide==-1)
-            {    player.SetMovementMode(new Vector2Int(WallUpDown, WallSide));
+            {    player.SetMovementMode(new Vector2Int(0, WallSide));
                 print("Cas avec wall right");
                 SetCameraPriority(WallRightCamera, WallLeftCamera,bossCamera,playerCamera,WallDownCamera);
             }
 
             if (WallSide==1)
             {   print("Cas avec wall left");
-                player.SetMovementMode(new Vector2Int(WallUpDown, WallSide));
+                player.SetMovementMode(new Vector2Int(0,WallSide));
                 SetCameraPriority(WallLeftCamera, WallRightCamera, bossCamera, playerCamera, WallDownCamera);
             }
         }
