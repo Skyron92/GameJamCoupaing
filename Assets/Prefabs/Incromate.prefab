@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 6413843829200649237}
   m_Layer: 6
   m_Name: Incromate
-  m_TagString: Untagged
+  m_TagString: Hitable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -161,7 +161,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 1
   incromatePrefab: {fileID: 790450303206583017}
-  isMerging: 0
   canMerge: 0
 --- !u!54 &6413843829200649237
 Rigidbody:
