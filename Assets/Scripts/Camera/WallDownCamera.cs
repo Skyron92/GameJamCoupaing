@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 
-public class CameraScript : MonoBehaviour
+public class WallDownCamera : MonoBehaviour
 {  
     private CinemachineFollow _follow;
     private CinemachineRotationComposer rotationComposer;
@@ -16,24 +16,14 @@ public class CameraScript : MonoBehaviour
     private CinemachineCamera CameraRef; 
     [SerializeField] private Transform TargetTransformPlayer;
     public Transform TargetTranformBoss;
+    private bool FirstHit = false;
     
    
     // Variables internes
   
-
- 
-
-    
-    // Positions spécifique pour le zoom joueur 
-    private float VerticalArmLenghtPlayerFloat = 1f;
-    private float CameraDistancePlayerFloat = 5f;
-
-    
-
-    
     
     //variables déplacements côtés 
-    private float ScreenPosXFloat = -0.50f;
+    private float ScreenPosXFloat = 0.25f;
 
    
     
@@ -50,6 +40,7 @@ public class CameraScript : MonoBehaviour
         _follow=GetComponent<CinemachineFollow>();
         rotationComposer= GetComponent<CinemachineRotationComposer>();
         FocusOnPlayer();
+        
     }
     
     // Update is called once per frame
@@ -61,22 +52,19 @@ public class CameraScript : MonoBehaviour
     
     public void FocusOnPlayer()
     {
-       
+        
             CameraRef.Follow = TargetTransformPlayer ;
             CameraRef.LookAt = TargetTransformPlayer ;
 
-            _follow.FollowOffset = new Vector3(0, 4, -5);
+            _follow.FollowOffset = new Vector3(0, 4, 13);
+            rotationComposer.Composition.ScreenPosition.x = ScreenPosXFloat;
+    
+       
+            
     }
     
     
     
-    public void CameraMoveHorizontally(float direction) {
-
-        
-            rotationComposer.Composition.ScreenPosition.x = ScreenPosXFloat * direction;
-     
-        
-    }
 
     public void ChangeFOVWhenRun()
     {
