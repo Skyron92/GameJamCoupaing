@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour {
     
     [SerializeField] private CameraScript cameraScript;
 
-    private Vector2Int _movementMode = new Vector2Int(0, 0);
+    private Vector2Int _movementMode = new Vector2Int(1, 0);
     
     public Animator animator;
     private void Awake() {
