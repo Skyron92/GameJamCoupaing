@@ -18,6 +18,8 @@ public class Incromate : MonoBehaviour, IHitable {
 
     [SerializeField] private LayerMask groundLayerMask;
     
+    [HideInInspector] public IncroAttackProvider incroAttack;
+    
     public int Health {
         get => _health;
         set => _health = value < 0 ? 0 : value;
@@ -35,6 +37,7 @@ public class Incromate : MonoBehaviour, IHitable {
         }
         _renderer = GetComponent<Renderer>();
         _material = _renderer.materials[0];
+        incroAttack = GetComponent<IncroAttackProvider>();
     }
 
     /// <summary>
@@ -60,12 +63,14 @@ public class Incromate : MonoBehaviour, IHitable {
             StopAllCoroutines();
             _agent!.SetDestination(hit.point);
             StartCoroutine(SetSpeed(_player.Speed));
+            incroAttack.enabled = true;
         }
     }
     
     private void OnOrderActionCanceled(InputAction.CallbackContext obj) {
         StopAllCoroutines();
         _agent!.SetDestination(_player.transform.position);
+        incroAttack.enabled = true;
     }
 
     /// <summary>

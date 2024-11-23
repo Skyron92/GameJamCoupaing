@@ -3,6 +3,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
     [SerializeField] InputActionReference moveActionRef, sprintActionRef, attractActionRef, orderActionRef, mousePosActionRef, rollActionRef;
@@ -24,7 +25,7 @@ public class PlayerController : MonoBehaviour {
     
     [SerializeField] private CameraScript cameraScript;
 
-    private Tuple<bool, int> _movementMode = new Tuple<bool, int>(true, 0);
+    private Vector2Int _movementMode = new Vector2Int(1, 0);
     
     public Animator animator;
     private void Awake() {
@@ -94,14 +95,15 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    public void SetMovementMode(Tuple<bool, int> movementMode) {
-        _movementMode = movementMode;
+    public void SetMovementMode(Vector2Int mode) {
+        _movementMode = mode;
     }
 
     private Vector3 GetMovementMode(Vector3 movement) {
+        bool moveFront = movement.x != 0;
         Vector3 newMovement = new Vector3(0,0,0);
-        newMovement.x = _movementMode.Item1 ? movement.x : movement.z;
-        newMovement.z = _movementMode.Item1 ? movement.z : movement.x * _movementMode.Item2;
+        newMovement.x = moveFront ? movement.x : movement.z * _movementMode.y;
+        newMovement.z = moveFront ? movement.z * _movementMode.x : movement.x * _movementMode.y;
         return newMovement;
     }
 

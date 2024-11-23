@@ -32,7 +32,7 @@ public class BrainCamera : MonoBehaviour
             {
                 if (!FirstTopWallHit)
                 {
-                    player.SetMovementMode(new Tuple<bool, int>(IsVertical, WallSide));
+                    player.SetMovementMode(new Vector2Int(WallUpDown, WallSide));
                     FocusOnBoss();
                     FirstTopWallHit = true;
                 }
@@ -48,14 +48,14 @@ public class BrainCamera : MonoBehaviour
         else
         {
             if (WallSide==-1)
-            {    player.SetMovementMode(new Tuple<bool, int>(IsVertical, WallSide));
+            {    player.SetMovementMode(new Vector2Int(WallUpDown, WallSide));
                 print("Cas avec wall right");
                 SetCameraPriority(WallRightCamera, WallLeftCamera,bossCamera,playerCamera,WallDownCamera);
             }
 
             if (WallSide==1)
             {   print("Cas avec wall left");
-                player.SetMovementMode(new Tuple<bool, int>(IsVertical, WallSide));
+                player.SetMovementMode(new Vector2Int(WallUpDown, WallSide));
                 SetCameraPriority(WallLeftCamera, WallRightCamera, bossCamera, playerCamera, WallDownCamera);
             }
         }
@@ -63,7 +63,7 @@ public class BrainCamera : MonoBehaviour
    
     public void FocusOnPlayer()
     {
-        player.SetMovementMode(new Tuple<bool, int>(true,0));
+        player.SetMovementMode(new Vector2Int(0,0));
         SetCameraPriority(playerCamera, bossCamera, WallRightCamera, WallLeftCamera, WallDownCamera);
         
     }
@@ -71,7 +71,7 @@ public class BrainCamera : MonoBehaviour
     
     public void FocusOnBoss()
     {
-        player.SetMovementMode(new Tuple<bool, int>(true,0));
+        player.SetMovementMode(new Vector2Int(0,0));
         SetCameraPriority(bossCamera, playerCamera, WallRightCamera, WallLeftCamera, WallDownCamera
         
         );

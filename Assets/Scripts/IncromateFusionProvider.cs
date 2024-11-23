@@ -1,5 +1,7 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class IncromateFusionProvider : MonoBehaviour
 {
@@ -7,6 +9,7 @@ public class IncromateFusionProvider : MonoBehaviour
     public GameObject incromatePrefab;
 
     private Incromate _incromate;
+ 
 
     public void SetIncromate(Incromate i) => _incromate = i;
     
@@ -17,6 +20,8 @@ public class IncromateFusionProvider : MonoBehaviour
         transform.DOScale(level * .3f, .5f).SetEase(Ease.OutBack);
         transform.position = new Vector3(transform.position.x, level / 2, transform.position.z);
         _incromate.Health = level;
+        _incromate.incroAttack.Damage = level;
+        _incromate.incroAttack.enabled = false;
     }
     
     private void OnTriggerEnter(Collider other) {
