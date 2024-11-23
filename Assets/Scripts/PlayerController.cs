@@ -1,9 +1,6 @@
-using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
     [SerializeField] InputActionReference moveActionRef, sprintActionRef, attractActionRef, orderActionRef, mousePosActionRef, rollActionRef;
@@ -25,7 +22,7 @@ public class PlayerController : MonoBehaviour {
     
     [SerializeField] private CameraScript cameraScript;
 
-    [SerializeField] private Vector2Int _movementMode = new Vector2Int(0, 0);
+    [SerializeField] private Vector2Int _movementMode = new Vector2Int(1, 0);
     
     public Animator animator;
     private void Awake() {
