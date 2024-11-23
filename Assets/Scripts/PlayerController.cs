@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour {
     public event MoveDelegate moved, moveUpdate, stopped;
     
     [SerializeField] private CameraScript cameraScript;
+
+    private Tuple<bool, int> _movementMode;
     
     public Animator animator;
     private void Awake() {
@@ -73,11 +75,23 @@ public class PlayerController : MonoBehaviour {
     IEnumerator Move() {
         while (MoveInput != Vector2.zero) {
             var direction = new Vector3(MoveInput.x, 0, MoveInput.y);
+            direction = GetMovementMode(direction);
             direction *= speed * Time.deltaTime;
             _characterController?.Move(direction);
             moveUpdate?.Invoke(0);
             yield return null;
         }
+    }
+
+    public void SetMovementMode(Tuple<bool, int> movementMode) {
+        _movementMode = movementMode;
+    }
+
+    private Vector3 GetMovementMode(Vector3 movement) {
+        Vector3 newMovement = new Vector3(0,0,0);
+        newMovement.x = _movementMode.Item1 ? movement.x : movement.y;
+        newMovement.y = _movementMode.Item1 ? movement.y : movement.x * _movementMode.Item2;
+        return newMovement;
     }
 
     private void OnTriggerEnter(Collider other) {

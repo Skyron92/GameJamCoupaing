@@ -1,4 +1,5 @@
 using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
@@ -9,7 +10,14 @@ public class Incromate : MonoBehaviour, IHitable {
     private PlayerController _player;
     public PlayerController Player => _player;
     private IncromateFusionProvider _fusionProvider;
+
+    private int _health;
     
+    private int Health {
+        get => _health;
+        set => _health = value < 0 ? 0 : value;
+    }
+
     private void Awake() {
         _agent = GetComponent<NavMeshAgent>();
         _fusionProvider = GetComponent<IncromateFusionProvider>();
@@ -111,13 +119,12 @@ public class Incromate : MonoBehaviour, IHitable {
         _player.AttractAction.canceled -= OnAttractActionCanceled;
     }
 
-    public void TakeDamage(int damage)
-    {
-        throw new System.NotImplementedException();
+    public void TakeDamage(int damageTaken) {
+        Health -= damageTaken;
+        if(Health <= 0) Die();
     }
 
-    public void Die()
-    {
-        throw new System.NotImplementedException();
+    [ContextMenu("Kill")]
+    public void Die() {
     }
 }
