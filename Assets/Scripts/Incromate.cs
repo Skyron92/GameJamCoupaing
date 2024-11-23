@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
-public class Incromate : MonoBehaviour { 
+public class Incromate : MonoBehaviour, IHitable { 
 
     NavMeshAgent _agent;
     private PlayerController _player;
@@ -109,5 +109,15 @@ public class Incromate : MonoBehaviour {
         _player.stopped -= OnPlayerStopped;
         _player.AttractAction.started -= OnAttractActionStarted;
         _player.AttractAction.canceled -= OnAttractActionCanceled;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Die()
+    {
+        throw new System.NotImplementedException();
     }
 }
