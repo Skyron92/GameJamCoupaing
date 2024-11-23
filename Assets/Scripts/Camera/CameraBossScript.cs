@@ -10,7 +10,7 @@ using UnityEngine;
 
 public class CameraBossScript : MonoBehaviour
 {  
-    private CinemachineThirdPersonFollow thirdPersonFollow;
+    private CinemachineFollow _follow;
     private CinemachineRotationComposer rotationComposer;
     private CinemachineCamera CameraRef; 
     
@@ -19,8 +19,7 @@ public class CameraBossScript : MonoBehaviour
 
     // positions spécifique pour le zoom Boss 
 
-    private float VerticalArmLenghtBossFloat = 20f;
-    private float CameraDistanceBossFloat = 25f;
+
     bool isLookingBoss = false;
     
  
@@ -37,7 +36,7 @@ public class CameraBossScript : MonoBehaviour
     {
         CameraRef = GetComponent<CinemachineCamera>();
         
-        thirdPersonFollow=GetComponent<CinemachineThirdPersonFollow>();
+        _follow=GetComponent<CinemachineFollow>();
         rotationComposer= GetComponent<CinemachineRotationComposer>();
         FocusOnBoss();
     }
@@ -52,8 +51,9 @@ public class CameraBossScript : MonoBehaviour
         
         CameraRef.Follow = TargetTransformPlayer;
         CameraRef.LookAt = TargetTranformBoss;
-        thirdPersonFollow.VerticalArmLength = VerticalArmLenghtBossFloat;
-        thirdPersonFollow.CameraDistance = CameraDistanceBossFloat;
+        
+        _follow.FollowOffset = new Vector3(0, 25, -10);
+        
         isLookingBoss = true;
         rotationComposer.Composition.ScreenPosition.x = 0f;
 

@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3327452682194091727}
   - component: {fileID: 7632806580977806147}
-  - component: {fileID: 1557472968779245269}
+  - component: {fileID: 7201950436944933702}
   - component: {fileID: 1542294813590445354}
   - component: {fileID: 5919433990024710536}
-  - component: {fileID: -6610545527098305794}
+  - component: {fileID: 3327490044240112686}
   m_Layer: 0
   m_Name: WallRightCamera
   m_TagString: Untagged
@@ -79,7 +79,7 @@ MonoBehaviour:
       BarrelClipping: 0.25
       Anamorphism: 0
   BlendHint: 0
---- !u!114 &1557472968779245269
+--- !u!114 &7201950436944933702
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -88,23 +88,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 6440473648635117444}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 625c14eee3ad46c99df7c7c891ef668a, type: 3}
+  m_Script: {fileID: 11500000, guid: b617507da6d07e749b7efdb34e1173e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damping: {x: 0.1, y: 0.5, z: 0.3}
-  ShoulderOffset: {x: 0, y: -0.4, z: 0}
-  VerticalArmLength: 2.14
-  CameraSide: 0.5
-  CameraDistance: 19.6
-  AvoidObstacles:
-    Enabled: 0
-    CollisionFilter:
-      serializedVersion: 2
-      m_Bits: 1
-    IgnoreTag: 
-    CameraRadius: 0.2
-    DampingIntoCollision: 0
-    DampingFromCollision: 0.5
+  TrackerSettings:
+    BindingMode: 4
+    PositionDamping: {x: 1, y: 1, z: 1}
+    AngularDampingMode: 0
+    RotationDamping: {x: 1, y: 1, z: 1}
+    QuaternionDamping: 1
+  FollowOffset: {x: 0, y: 0, z: -10}
 --- !u!114 &1542294813590445354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,7 +157,7 @@ MonoBehaviour:
   m_Damping: 1.91
   m_DampingWhenOccluded: 1.15
   m_OptimalTargetDistance: 3.36
---- !u!114 &-6610545527098305794
+--- !u!114 &3327490044240112686
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -173,7 +166,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6440473648635117444}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1577b9baa86cb04a9784b8c99da2245, type: 3}
+  m_Script: {fileID: 11500000, guid: 59c71c9d2d976b14fac7f540098b00aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   TargetTransformPlayer: {fileID: 0}

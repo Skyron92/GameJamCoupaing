@@ -26,11 +26,12 @@ public class BrainCamera : MonoBehaviour
         {
             if (WallSide==-1)
             {
-                SetCameraPriority(WallRightCamera, WallLeftCamera, WallRightCamera,bossCamera,playerCamera);
+                print("Cas avec wall right");
+                SetCameraPriority(WallRightCamera, WallLeftCamera,bossCamera,playerCamera);
             }
 
             if (WallSide==1)
-            {
+            {   print("Cas avec wall left");
                 SetCameraPriority(WallLeftCamera, WallRightCamera, bossCamera, playerCamera);
             }
         }
