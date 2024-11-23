@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField, Range(1,100)] float speed = 50;
     public float Speed => speed;
     [SerializeField, Range(1,100)] float sprintBoost = 10;
+    [SerializeField] GameObject sprintEffect;
     
     public delegate void MoveDelegate(float speed);
     public event MoveDelegate moved, moveUpdate, stopped;
@@ -70,12 +71,14 @@ public class PlayerController : MonoBehaviour {
         speed += sprintBoost;
         if (!MoveAction.IsPressed()) return;
         animator?.SetBool("IsRunning", true);
+        sprintEffect.SetActive(true);
         moved?.Invoke(speed);
     }
     
     private void OnSprintActionCanceled(InputAction.CallbackContext obj) {
         speed -= sprintBoost;
         animator?.SetBool("IsRunning", false);
+        sprintEffect.SetActive(false);
     }
 
     IEnumerator Move() {
@@ -93,6 +96,11 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void SetMovementMode(Vector2Int mode) {
+        StartCoroutine(SetMovementModeWithDelay(mode, 1f));
+    }
+
+    IEnumerator SetMovementModeWithDelay(Vector2Int mode, float delay) {
+        yield return new WaitForSeconds(delay);
         _movementMode = mode;
     }
 
