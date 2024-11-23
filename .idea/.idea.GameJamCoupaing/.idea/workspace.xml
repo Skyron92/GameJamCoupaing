@@ -5,11 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f62bccd6-1efb-4b07-9cc2-0aceb96cb30f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/IncroAttackProvider.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/IncroAttackProvider.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GameJamCoupaing/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GameJamCoupaing/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/GameboyShader/GBCamera/gbcamera_PPS.unitypackage.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/InputSystem_Actions.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/InputSystem_Actions.inputactions" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Incromate.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Incromate.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/PlayerModel 1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/PlayerModel 1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/trap.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/trap.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/LeoTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/LeoTest.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Incromate.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Incromate.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/IncromateFusionProvider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/IncromateFusionProvider.cs" afterDir="false" />
