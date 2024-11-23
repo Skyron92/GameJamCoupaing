@@ -4,7 +4,7 @@ using UnityEngine;
 public class IncromateFusionProvider : MonoBehaviour
 {
     [HideInInspector] public int level = 1;
-    [SerializeField] GameObject incromatePrefab;
+    public GameObject incromatePrefab;
 
     private Incromate _incromate;
 
@@ -12,10 +12,11 @@ public class IncromateFusionProvider : MonoBehaviour
     
     [HideInInspector] public bool canMerge;
 
-    private void Initialize(int _level) {
+    public void Initialize(int _level) {
         level = _level;
         transform.DOScale(level * .3f, .5f).SetEase(Ease.OutBack);
         transform.position = new Vector3(transform.position.x, level / 2, transform.position.z);
+        _incromate.Health = level;
     }
     
     private void OnTriggerEnter(Collider other) {
@@ -39,10 +40,31 @@ public class IncromateFusionProvider : MonoBehaviour
         }
     }
 
+    [ContextMenu("Spawn Lvl 5")]
+    public void TestSpawn()
+    {
+        var instance = Instantiate(incromatePrefab, Vector3.zero, Quaternion.identity);
+        var fusion = instance.GetComponent<IncromateFusionProvider>();
+        fusion.Initialize(5);
+    }
+
     void Merge(Vector3 position) {
         var newIncromate= Instantiate(incromatePrefab, position, Quaternion.identity);
         newIncromate.GetComponent<IncromateFusionProvider>().Initialize(level + 1);
         newIncromate.GetComponent<Incromate>().SetPlayerAndBindMovement(_incromate.Player);
         Destroy(gameObject);
+    }
+
+    public void Split() {
+        if(level <= 2) return;
+        Spawn();
+        Spawn();
+    }
+
+    private void Spawn() {
+        Vector3 pos = transform.position + new Vector3(Random.Range(-1, 1),0,Random.Range(-1, 1));
+        var instance = Instantiate(incromatePrefab, pos, Quaternion.identity);
+        var fusion = instance.GetComponent<IncromateFusionProvider>();
+        fusion.Initialize(Random.Range(1, level - 1));
     }
 }

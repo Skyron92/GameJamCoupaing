@@ -16,7 +16,7 @@ public class Incromate : MonoBehaviour, IHitable {
 
     private int _health;
     
-    private int Health {
+    public int Health {
         get => _health;
         set => _health = value < 0 ? 0 : value;
     }
@@ -33,8 +33,6 @@ public class Incromate : MonoBehaviour, IHitable {
         }
         _renderer = GetComponent<Renderer>();
         _material = _renderer.materials[0];
-        
-        Health = _fusionProvider.level;
     }
 
     /// <summary>
@@ -129,11 +127,11 @@ public class Incromate : MonoBehaviour, IHitable {
     }
 
     [ContextMenu("Hit")]
-    public void OnHit()
+    public void Hit()
     {
-        transform.DOMove(transform.position + transform.forward * -.5f, .5f);
-        _material.DOColor(Color.red, .2f).onComplete += () => _material.DOColor(Color.white, .2f);
+        TakeDamage(1);
     }
+    
     public void TakeDamage(int damageTaken) {
         Health -= damageTaken;
         _material.DOColor(Color.red, .2f).onComplete += () => _material.DOColor(Color.white, .2f);
@@ -145,10 +143,15 @@ public class Incromate : MonoBehaviour, IHitable {
 
     [ContextMenu("Kill")]
     public void Die() {
+        Destroy(GetComponent<Collider>());
         StopAllCoroutines();
-        _agent.SetDestination(transform.position);
-        var deathFX = Instantiate(deathEffect, transform.position, Quaternion.identity);
-        Destroy(deathFX, 5f);
+        TrySplit();
+        Instantiate(deathEffect, transform.position, Quaternion.identity);
         transform.DOScale(Vector3.zero, .5f).onComplete += () => Destroy(gameObject);
+        
+    }
+
+    private void TrySplit() {
+        _fusionProvider.Split();
     }
 }

@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a361519265484eb449060e5e6faef877, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathEffect: {fileID: 8130593110121980478, guid: 2d3f0cb46d9ec8542bb5d56063be3018, type: 3}
 --- !u!195 &5739056507225100583
 NavMeshAgent:
   m_ObjectHideFlags: 0
