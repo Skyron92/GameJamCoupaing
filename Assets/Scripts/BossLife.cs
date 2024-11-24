@@ -28,4 +28,11 @@ public class BossLife : Enemy
         healthSlider.OutAnimation();
         base.Die();
     }
+    
+    private void OnTriggerEnter(Collider other) {
+        if (other.gameObject.CompareTag("Hitable")) {
+            var target = other.gameObject.GetComponent<IHitable>();
+            Attack(target, damage);
+        }
+    }
 }
