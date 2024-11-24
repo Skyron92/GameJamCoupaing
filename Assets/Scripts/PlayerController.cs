@@ -123,11 +123,16 @@ public class PlayerController : MonoBehaviour, IHitable
     }
 
     public void SetMovementMode(Vector2Int mode) {
+        StopCoroutine(SetMovementModeWithDelay(mode, 1f));
+        // Ok je vais changer la config de mes inputs :)
         StartCoroutine(SetMovementModeWithDelay(mode, 1f));
     }
 
     IEnumerator SetMovementModeWithDelay(Vector2Int mode, float delay) {
+        // J'attend une seconde que la caméra ai le temps de faire son animation
         yield return new WaitForSeconds(delay);
+        //!!!!!! Problème ici => J'ai pu recevoir une nouvelle demande de changement d'input, au quel cas j'arrête mon changement.
+        // Je change la config de mes inputs
         _movementMode = mode;
     }
 
