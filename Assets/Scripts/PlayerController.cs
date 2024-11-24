@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour, IHitable
     [SerializeField, Range(1,100)] float speed = 50;
     public float Speed => speed;
     [SerializeField, Range(1,100)] float sprintBoost = 10;
-    [SerializeField] GameObject sprintEffect;
+    [SerializeField] GameObject pathEffect ,sprintEffect;
     
     public delegate void MoveDelegate(float speed);
     public event MoveDelegate moved, moveUpdate, stopped;
@@ -104,12 +104,14 @@ public class PlayerController : MonoBehaviour, IHitable
         cameraScript?.CameraMoveHorizontally(MoveInput.x);
         StartCoroutine(Move());
         animator.SetBool("IsWalking", true);
+        pathEffect.SetActive(true);
         moved?.Invoke(speed);
     }
     
     private void OnMoveActionCanceled(InputAction.CallbackContext obj) {
         StopAllCoroutines();
         animator?.SetBool("IsWalking", false);
+        pathEffect.SetActive(false);
         stopped?.Invoke(0);
     }
 

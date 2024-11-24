@@ -57,11 +57,12 @@ public class Incromate : MonoBehaviour, IHitable {
 
     private void OnOrderActionStarted(InputAction.CallbackContext obj) {
         var pos= _player.GetOrderPosition();
-        if(pos == Vector3.zero) return; 
+        if(pos == Vector3.zero) return;
         StopAllCoroutines(); 
         _agent!.SetDestination(pos); 
         StartCoroutine(SetSpeed(_player.Speed)); 
         incroAttack.enabled = true;
+        
     }
     
     private void OnOrderActionCanceled(InputAction.CallbackContext obj) {
