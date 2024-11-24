@@ -25,6 +25,7 @@ public class WallColliderScript : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
+            print(other);
           _brainCamera.FocusOnWall(isVertical, WallSide, WallTop);
         }
     }
