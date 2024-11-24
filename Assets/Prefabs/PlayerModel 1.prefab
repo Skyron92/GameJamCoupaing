@@ -9963,9 +9963,13 @@ MonoBehaviour:
   cameraScript: {fileID: 0}
   _movementMode: {x: 1, y: 0}
   animator: {fileID: 4207331918442446511}
-  SoundManager: {fileID: 0}
+  SoundManager: {fileID: 9191615631071354947}
   health: 5
   healthSlider: {fileID: 0}
+  orderEffect: {fileID: 0}
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!135 &1766243694482739896
 SphereCollider:
   m_ObjectHideFlags: 0

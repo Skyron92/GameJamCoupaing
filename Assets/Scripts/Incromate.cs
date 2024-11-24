@@ -15,8 +15,6 @@ public class Incromate : MonoBehaviour, IHitable {
     private Material _material;
 
     private int _health;
-
-    [SerializeField] private LayerMask groundLayerMask;
     
     [HideInInspector] public IncroAttackProvider incroAttack;
 
@@ -58,15 +56,12 @@ public class Incromate : MonoBehaviour, IHitable {
     }
 
     private void OnOrderActionStarted(InputAction.CallbackContext obj) {
-        var screenPos = _player.MousePosInput;
-        var pos = new Vector3(screenPos.x, screenPos.y, 100);
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(pos), out RaycastHit hit,
-                1000, groundLayerMask)) {
-            StopAllCoroutines();
-            _agent!.SetDestination(hit.point);
-            StartCoroutine(SetSpeed(_player.Speed));
-            incroAttack.enabled = true;
-        }
+        var pos= _player.GetOrderPosition();
+        if(pos == Vector3.zero) return; 
+        StopAllCoroutines(); 
+        _agent!.SetDestination(pos); 
+        StartCoroutine(SetSpeed(_player.Speed)); 
+        incroAttack.enabled = true;
     }
     
     private void OnOrderActionCanceled(InputAction.CallbackContext obj) {

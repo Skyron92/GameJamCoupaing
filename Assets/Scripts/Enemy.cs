@@ -18,3 +18,12 @@ public class Enemy : Trap ,IHitable {
         Destroy(gameObject);
     }
 }
+
+public class KillableEnemy : Enemy {
+    private void OnTriggerEnter(Collider other) {
+        if (other.gameObject.CompareTag("Hitable")) {
+            var target = other.gameObject.GetComponent<IHitable>();
+            Attack(target, damage);
+        }
+    }
+}
