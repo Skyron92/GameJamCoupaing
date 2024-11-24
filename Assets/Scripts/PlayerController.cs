@@ -41,6 +41,12 @@ public class PlayerController : MonoBehaviour, IHitable
     [SerializeField] SliderManager healthSlider;
     private Renderer[] _renderers;
     private List<Material> _materials = new List<Material>();
+    
+    [Header("Order")]
+    [SerializeField] GameObject orderEffect;
+    private GameObject _orderEffectInstance;
+    private Vector3 _orderPosition;
+    [SerializeField] private LayerMask groundLayerMask;
 
     private int Health {
         get => health;
@@ -58,6 +64,14 @@ public class PlayerController : MonoBehaviour, IHitable
     }
 
     private void OnEnable() {
+        BindInputs();
+    }
+
+    private void OnDisable() {
+        UnbindInputs();
+    }
+    
+    private void BindInputs() {
         MoveAction.Enable();
         MoveAction.started += OnMoveActionStarted;
         MoveAction.canceled += OnMoveActionCanceled;
@@ -66,10 +80,12 @@ public class PlayerController : MonoBehaviour, IHitable
         SprintAction.canceled += OnSprintActionCanceled;
         AttractAction.Enable();
         OrderAction.Enable();
+        OrderAction.started += OnOrderActionStarted;
+        OrderAction.canceled += OnOrderActionCanceled;
         MousePosAction.Enable();
     }
 
-    private void OnDisable() {
+    private void UnbindInputs() {
         MoveAction.Disable();
         MoveAction.started -= OnMoveActionStarted;
         MoveAction.canceled -= OnMoveActionCanceled;
@@ -78,7 +94,9 @@ public class PlayerController : MonoBehaviour, IHitable
         sprintActionRef.action.canceled -= OnSprintActionCanceled;
         AttractAction.Disable();
         OrderAction.Disable();
-        MousePosAction.Enable();
+        OrderAction.started -= OnOrderActionStarted;
+        OrderAction.canceled -= OnOrderActionCanceled;
+        MousePosAction.Disable();
     }
 
     private void OnMoveActionStarted(InputAction.CallbackContext obj) {
@@ -108,6 +126,27 @@ public class PlayerController : MonoBehaviour, IHitable
         animator?.SetBool("IsRunning", false);
         SoundManager.isRunning = false;
         sprintEffect.SetActive(false);
+    }
+
+    private void OnOrderActionStarted(InputAction.CallbackContext obj) {
+        var screenPos = MousePosInput;
+        var pos = new Vector3(screenPos.x, screenPos.y, 100);
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(pos), out RaycastHit hit,
+                1000, groundLayerMask)) {
+            _orderPosition = hit.point;
+            if (_orderEffectInstance != null) Destroy(_orderEffectInstance);
+            _orderEffectInstance = Instantiate(orderEffect, _orderPosition, Quaternion.identity);
+        }
+        else _orderPosition = Vector3.zero;
+    }
+    
+    private void OnOrderActionCanceled(InputAction.CallbackContext obj) {
+        if(_orderEffectInstance != null) Destroy(_orderEffectInstance);
+        _orderPosition = Vector3.zero;
+    }
+
+    public Vector3 GetOrderPosition() {
+        return _orderPosition;
     }
 
     IEnumerator Move() {
@@ -178,15 +217,7 @@ public class PlayerController : MonoBehaviour, IHitable
         Destroy(_rigidbody);
         animator.SetTrigger("Dead");
         healthSlider.OutAnimation();
-        MoveAction.Disable();
-        MoveAction.started -= OnMoveActionStarted;
-        MoveAction.canceled -= OnMoveActionCanceled;
-        SprintAction.Disable();
-        SprintAction.started -= OnSprintActionStarted;
-        sprintActionRef.action.canceled -= OnSprintActionCanceled;
-        AttractAction.Disable();
-        OrderAction.Disable();
-        MousePosAction.Enable();
-        enabled = false;
+        UnbindInputs();
+        Destroy(this);
     }
 }
