@@ -52,7 +52,7 @@ public class CameraBossScript : MonoBehaviour
         CameraRef.Follow = TargetTransformPlayer;
         CameraRef.LookAt = TargetTranformBoss;
         
-        _follow.FollowOffset = new Vector3(0, 15, -10);
+        _follow.FollowOffset = new Vector3(10, 15, -10);
         
         isLookingBoss = true;
         rotationComposer.Composition.ScreenPosition.x = 0f;
