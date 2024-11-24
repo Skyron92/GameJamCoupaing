@@ -17,6 +17,7 @@ public class Boss : MonoBehaviour
     [SerializeField] GameObject projectilePrefab; // Préfabriqué du projectile
     [SerializeField] Transform projectileSpawnPoint; // Point de spawn du projectile
     private int projectileSpeed = 3;
+    public Animator animator;
 
     private void Awake()
     {
@@ -44,6 +45,7 @@ public class Boss : MonoBehaviour
         {
             print("onEnter  ");
             isChasing = true;
+            animator.SetBool("IsWalking", true);
             StartCoroutine(ChasePlayerCoroutine());
         }
     }
@@ -54,6 +56,7 @@ public class Boss : MonoBehaviour
         {
             print("OnExit");
             isChasing = false;
+            animator.SetBool("IsWalking", false);
             BossAgent.destination = transform.position; 
             StopCoroutine(ChasePlayerCoroutine()); 
         }
@@ -89,6 +92,7 @@ public class Boss : MonoBehaviour
             if (rb != null)
             {   print("ajoute force projectile");
                 rb.useGravity = false;
+                animator.SetTrigger("IsAttacking");
                 rb.AddForce(directionToPlayer * projectileSpeed, ForceMode.Impulse);
                
             }
