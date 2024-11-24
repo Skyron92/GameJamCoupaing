@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour, IHitable
     
     [SerializeField, Range(0, 5)] private int health = 1;
     [SerializeField] SliderManager healthSlider;
+    [SerializeField] private GameObject gameOverPanel;
     private Renderer[] _renderers;
     private List<Material> _materials = new List<Material>();
 
@@ -236,6 +237,7 @@ public class PlayerController : MonoBehaviour, IHitable
         animator.SetTrigger("Dead");
         healthSlider.OutAnimation();
         UnbindInputs();
+        gameOverPanel.SetActive(true);
         Destroy(this);
     }
 }
