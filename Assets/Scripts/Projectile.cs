@@ -21,13 +21,16 @@ public class Projectile : Trap
     }
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.CompareTag("Hitable")) {
+            print(other.gameObject.name);
             
             var target = other.gameObject.GetComponent<IHitable>();
             Attack(target, damage);
             Destroy(GetComponent<Rigidbody>());
             HitVFX.SetActive(true);
-            print("active hit vfx");
-            DestroyAfterVFX(HitVFX);
+            
+          GameObject VFX =  Instantiate(HitVFX, transform.position , Quaternion.identity);
+            print(HitVFX+" "+ HitVFX.activeSelf);
+            StartCoroutine(DestroyAfterVFX(VFX));
             print("Rentre collision joueur");
         }
         else if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
@@ -47,6 +50,7 @@ public class Projectile : Trap
 
         // Active les particules et commence le scaling
         FloorVFX.SetActive(true);
+        GameObject VFX = Instantiate(FloorVFX, transform.position , Quaternion.identity);
         transform.DOScale(0f, 1f).SetEase(Ease.Linear);
 
         // Lance la destruction après la fin des VFX
