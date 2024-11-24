@@ -65,7 +65,7 @@ public class CameraScript : MonoBehaviour
             CameraRef.Follow = TargetTransformPlayer ;
             CameraRef.LookAt = TargetTransformPlayer ;
 
-            _follow.FollowOffset = new Vector3(0, 1, -1);
+            _follow.FollowOffset = new Vector3(0, 1, -8);
     }
     
     

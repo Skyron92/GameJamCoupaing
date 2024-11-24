@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -1931071756254241274}
   - component: {fileID: 1542294813590445354}
   - component: {fileID: 5919433990024710536}
-  - component: {fileID: 8410870783986392232}
+  - component: {fileID: 5508199204080578684}
   m_Layer: 0
   m_Name: PlayerCamera
   m_TagString: Untagged
@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Damping: 1.91
   m_DampingWhenOccluded: 1.15
   m_OptimalTargetDistance: 3.36
---- !u!114 &8410870783986392232
+--- !u!114 &5508199204080578684
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

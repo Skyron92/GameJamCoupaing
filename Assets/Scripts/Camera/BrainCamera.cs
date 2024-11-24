@@ -37,9 +37,10 @@ public class BrainCamera : MonoBehaviour
                     player.SetMovementMode(new Vector2Int(1,0));
                     FocusOnBoss();
                     FirstTopWallHit = true;
+                    print("focus on boss psq première fois ");
                 }
                 else
-                {
+                {print("deuxième fois donc je focus mur ");
                     player.SetMovementMode(new Vector2Int(WallUpDown, 0));
                     SetCameraPriority(WallDownCamera, WallRightCamera, WallLeftCamera,bossCamera, playerCamera);
                 }
