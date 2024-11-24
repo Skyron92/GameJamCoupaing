@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour, IHitable
     Vector2 MoveInput => MoveAction.ReadValue<Vector2>();
     
     CharacterController _characterController;
+    private Rigidbody _rigidbody;
     [Header("Movement")]
     [SerializeField, Range(1,100)] float speed = 50;
     public float Speed => speed;
@@ -48,6 +49,7 @@ public class PlayerController : MonoBehaviour, IHitable
     
     private void Awake() {
         _characterController = GetComponent<CharacterController>();
+        _rigidbody = GetComponent<Rigidbody>();
         healthSlider.maxValue = Health;
         _renderers = GetComponentsInChildren<Renderer>();
         foreach (var renderer in _renderers) {
@@ -173,6 +175,7 @@ public class PlayerController : MonoBehaviour, IHitable
     }
 
     public void Die() {
+        Destroy(_rigidbody);
         animator.SetTrigger("Dead");
         healthSlider.OutAnimation();
         MoveAction.Disable();
