@@ -42,9 +42,10 @@ public class PlayerController : MonoBehaviour, IHitable
     [SerializeField] SliderManager healthSlider;
     private Renderer[] _renderers;
     private List<Material> _materials = new List<Material>();
-    
-    [Header("Order")]
-    [SerializeField] GameObject orderEffect;
+
+    [Header("Incromates")] [SerializeField]
+    private GameObject waveEffect;
+    [SerializeField] private GameObject orderEffect;
     private GameObject _orderEffectInstance;
     private Vector3 _orderPosition;
     [SerializeField] private LayerMask groundLayerMask;
@@ -80,6 +81,8 @@ public class PlayerController : MonoBehaviour, IHitable
         SprintAction.started += OnSprintActionStarted;
         SprintAction.canceled += OnSprintActionCanceled;
         AttractAction.Enable();
+        AttractAction.started += OnAttractActionStated;
+        AttractAction.canceled += OnAttractActionCanceled;
         OrderAction.Enable();
         OrderAction.started += OnOrderActionStarted;
         OrderAction.canceled += OnOrderActionCanceled;
@@ -94,6 +97,8 @@ public class PlayerController : MonoBehaviour, IHitable
         SprintAction.started -= OnSprintActionStarted;
         sprintActionRef.action.canceled -= OnSprintActionCanceled;
         AttractAction.Disable();
+        AttractAction.started -= OnAttractActionStated;
+        AttractAction.canceled -= OnAttractActionCanceled;
         OrderAction.Disable();
         OrderAction.started -= OnOrderActionStarted;
         OrderAction.canceled -= OnOrderActionCanceled;
@@ -129,6 +134,14 @@ public class PlayerController : MonoBehaviour, IHitable
         animator?.SetBool("IsRunning", false);
         SoundManager.isRunning = false;
         sprintEffect.SetActive(false);
+    }
+    
+    private void OnAttractActionStated(InputAction.CallbackContext obj) {
+        waveEffect.SetActive(true);
+    }
+    
+    private void OnAttractActionCanceled(InputAction.CallbackContext obj) {
+        waveEffect.SetActive(false);
     }
 
     private void OnOrderActionStarted(InputAction.CallbackContext obj) {
