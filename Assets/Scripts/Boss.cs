@@ -98,7 +98,7 @@ public class Boss : MonoBehaviour
             }
 
             // Détruire le projectile après un temps pour éviter les fuites de mémoire
-            Destroy(projectile, 5f);
+            Destroy(projectile, 4f);
         }
         else
         {
@@ -109,8 +109,8 @@ public class Boss : MonoBehaviour
     private IEnumerator ChasePlayerCoroutine()
     {
         float timeSinceLastEvent = 0f;
-        float eventInterval = UnityEngine.Random.Range(3f, 8f); 
-        float attackPauseDuration = 2f; 
+        float eventInterval = UnityEngine.Random.Range(5f, 10f); 
+        float attackPauseDuration = 3f; 
 
         while (isChasing)
         {
@@ -136,7 +136,7 @@ public class Boss : MonoBehaviour
             {
                 // Réinitialise le temps écoulé et génère un nouvel intervalle
                 timeSinceLastEvent = 0f;
-                eventInterval = UnityEngine.Random.Range(3f, 8f);
+                eventInterval = UnityEngine.Random.Range(5f, 10f);
                 isAttacking = true;
             }
 

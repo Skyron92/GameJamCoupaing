@@ -56,7 +56,7 @@ public class WallDownCamera : MonoBehaviour
             CameraRef.Follow = TargetTransformPlayer ;
             CameraRef.LookAt = TargetTransformPlayer ;
 
-            _follow.FollowOffset = new Vector3(0, 4, 13);
+            _follow.FollowOffset = new Vector3(-2, 3, 10);
             rotationComposer.Composition.ScreenPosition.x = ScreenPosXFloat;
     
        
