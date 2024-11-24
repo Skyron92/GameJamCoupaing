@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -135,7 +136,9 @@ public class PlayerController : MonoBehaviour, IHitable
                 1000, groundLayerMask)) {
             _orderPosition = hit.point;
             if (_orderEffectInstance != null) Destroy(_orderEffectInstance);
-            _orderEffectInstance = Instantiate(orderEffect, _orderPosition, Quaternion.identity);
+            var target = _orderPosition;
+            target.y += .1f;
+            _orderEffectInstance = Instantiate(orderEffect, target, Quaternion.identity);
         }
         else _orderPosition = Vector3.zero;
     }
