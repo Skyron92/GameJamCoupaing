@@ -96,9 +96,9 @@ public class Boss : MonoBehaviour
                 rb.AddForce(directionToPlayer * projectileSpeed, ForceMode.Impulse);
                
             }
-
+            
             // Détruire le projectile après un temps pour éviter les fuites de mémoire
-            Destroy(projectile, 4f);
+            //Destroy(projectile, 4f);
         }
         else
         {
